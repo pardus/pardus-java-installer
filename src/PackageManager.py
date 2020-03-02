@@ -16,6 +16,7 @@ class PackageManager:
         self.isInstalledCommand = ["dpkg", "-s", "--PACKAGE--"]
         self.getAlternativesListCommand = ["update-alternatives", "--query", "java"]
         self.autoAlternativeCommand = ["pkexec", "update-alternatives", "--auto", "java"]
+        self.updateAndRemoveCommand = ["pkexec", "/bin/sh", "-c", "update-alternatives --auto java && apt purge --PACKAGE-- -yq"]
 
         # Get initialize infos:
         self.findDefault()
@@ -32,17 +33,22 @@ class PackageManager:
             # Install
             installCommand = self.installCommand
             installCommand[3] = pack['package']
+            self.progressWindow.show()
             self.startProcess(installCommand)
     
     def remove(self, packageIndex):
         pack = self.packages[packageIndex]
 
         if self.isDefault(packageIndex):
-            self.startProcessSync(self.autoAlternativeCommand)
-
-        removeCommand = self.removeCommand
-        removeCommand[3] = pack['package']
-        self.startProcess(removeCommand)
+            updateAndRemoveCommand = self.updateAndRemoveCommand
+            updateAndRemoveCommand[3] = updateAndRemoveCommand[3].replace("--PACKAGE--", pack['package'] + "*")
+            self.progressWindow.show()
+            self.startProcess(updateAndRemoveCommand)
+        else:
+            removeCommand = self.removeCommand
+            removeCommand[3] = pack['package'] + "*"
+            self.progressWindow.show()
+            self.startProcess(removeCommand)
 
     
 
@@ -67,17 +73,14 @@ class PackageManager:
 
         for i in stdout.splitlines(0):
             line = i.decode("utf-8").split(": ")
-            print(line)
             if str(line[0]) == "Value":
                 self.defaultJavaPath = line[1]
-                print(self.defaultJavaPath)
                 return
 
 
 
     # PROCESS SPAWNING:
-    def startProcess(self, params):
-        self.progressWindow.show()        
+    def startProcess(self, params):      
 
         pid, stdin, stdout, stderr = GLib.spawn_async(params,
                                     flags=GLib.SPAWN_SEARCH_PATH | GLib.SPAWN_LEAVE_DESCRIPTORS_OPEN | GLib.SPAWN_DO_NOT_REAP_CHILD,
@@ -94,8 +97,6 @@ class PackageManager:
             return False
         line = source.readline()
 
-        print(f"[stdout]: {line}")
-
         self.progressWindow.appendText(line)
         return True
     
@@ -104,12 +105,9 @@ class PackageManager:
             return False
         line = source.readline()
 
-        print(f"[stderr]: {line}")
-
         self.progressWindow.appendText(line)
         return True
 
     def onProcessExit(self, pid, status):
-        print(f"{pid}: {status}")
         self.progressWindow.hide()
         self.onProcessFinished()
