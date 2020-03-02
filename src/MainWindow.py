@@ -87,9 +87,11 @@ class MainWindow:
             self.grid.attach(box, i % gridWidth, i / gridWidth, 1, 1)
     
     def btn_install_clicked(self, button):
+        self.window.set_sensitive(False)
         self.packageManager.installOrMakeDefault(int(button.get_name()))
     
     def btn_remove_clicked(self, button):
+        self.window.set_sensitive(False)
         self.packageManager.remove(int(button.get_name()))
     
     def onProcessFinished(self):
@@ -126,5 +128,6 @@ class MainWindow:
             btn_remove.set_sensitive(isPackInstalled)
 
             i = i - 1
-            
+        
+        self.window.set_sensitive(True)
         self.window.show_all()
