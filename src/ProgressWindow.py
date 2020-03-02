@@ -22,12 +22,13 @@ class ProgressWindow:
         # Display:
         self.outputBuffer = self.builder.get_object("outputBuffer")
         self.progressBar = self.builder.get_object("progressBar")
+        self.scrolledWindow = self.builder.get_object("scrolledWindow")
         
     
     def appendText(self, text):
-        #self.progressBar.pulse()
         self.outputBuffer.insert_at_cursor(text)
-        # self.outputBuffer.move_mark(self.outputBuffer.get_end_iter())
+        adj = self.scrolledWindow.get_vadjustment()
+        adj.set_value(adj.get_upper())
     
     def show(self):
         self.outputBuffer.set_text("")
@@ -47,4 +48,7 @@ class ProgressWindow:
         self.t.start()
     
     def stopProgressAnimation(self):
-        self.t.cancel()
+        try:
+            self.t.cancel()
+        except AttributeError:
+            pass
