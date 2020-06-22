@@ -1,0 +1,14 @@
+[Desktop Entry]
+Name=Pardus Java Installer
+Name[tr]=Pardus Java Kurucu
+GenericName=Java Installer
+GenericName[tr]=Java Kurucu
+Comment=Install & Manage different Java versions easily.
+Comment[tr]=Farklı Java sürümlerini kolayca kurun ve yönetin.
+Exec=pardus-java-installer
+Icon=/usr/share/pardus/pardus-java-installer/icon.svg
+Terminal=false
+Type=Application
+Categories=System;
+StartupNotify=true
+Keywords=java;installer;pardus;
