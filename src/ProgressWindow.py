@@ -3,12 +3,28 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import GLib, Gio, Gtk
 from threading import Timer
 
+import locale, os
+from locale import gettext as tr
+
+# Translation Constants:
+APPNAME = "pardus-java-installer"
+TRANSLATIONS_PATH = "/usr/share/locale"
+SYSTEM_LANGUAGE = os.environ.get("LANG")
+
+# Translation functions:
+locale.bindtextdomain(APPNAME, TRANSLATIONS_PATH)
+locale.textdomain(APPNAME)
+locale.setlocale(locale.LC_ALL, SYSTEM_LANGUAGE)
 
 class ProgressWindow:
     def __init__(self, application):
         # Gtk Builder
         self.builder = Gtk.Builder()
-        self.builder.add_from_file("../ui/ProgressWindow.glade")
+
+         # Translate things on glade:
+        self.builder.set_translation_domain(APPNAME)
+
+        self.builder.add_from_file(os.path.dirname(os.path.abspath(__file__)) + "/../ui/ProgressWindow.glade")
         self.builder.connect_signals(self)
 
         # Add Window
@@ -23,6 +39,7 @@ class ProgressWindow:
         self.outputBuffer = self.builder.get_object("outputBuffer")
         self.progressBar = self.builder.get_object("progressBar")
         self.scrolledWindow = self.builder.get_object("scrolledWindow")
+        self.lbl_header = self.builder.get_object("lbl_header")
         
     
     def appendText(self, text):
@@ -39,8 +56,8 @@ class ProgressWindow:
         self.stopProgressAnimation()
         self.window.hide()
 
-
     def startProgressAnimation(self,ms):
+        self.lbl_header.set_text(tr("Processing..."))
         def func_wrapper():
             self.progressBar.pulse()
             self.startProgressAnimation(ms)
@@ -48,6 +65,7 @@ class ProgressWindow:
         self.t.start()
     
     def stopProgressAnimation(self):
+        self.lbl_header.set_text(tr("Process Done."))
         try:
             self.t.cancel()
         except AttributeError:
