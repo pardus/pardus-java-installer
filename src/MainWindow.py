@@ -8,16 +8,35 @@ from ProgressWindow import ProgressWindow
 packages = [
     { "name":"OpenJDK 11", "package":"openjdk-11-jre", "icon":"openjdk-11", "path":"/usr/lib/jvm/java-11-openjdk-amd64/bin/java" },
     { "name":"OpenJDK 8", "package":"openjdk-8-jre", "icon":"openjdk-8", "path":"/usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java" },
-    { "name":"Oracle Java 8", "package":"oracle-java-8-jre", "icon":"application-java", "path":"/usr/lib/jvm/oracle-java-8-amd64/bin/java" },   
+    { "name":"Oracle Java 11", "package":"oracle-jdk-11", "icon":"application-java", "path":"/usr/lib/jvm/jdk-11.0.7/bin/java" }, 
+    { "name":"Oracle Java 14", "package":"oracle-jdk-14", "icon":"application-java", "path":"/usr/lib/jvm/jdk-14.0.1/bin/java" },
+    { "name":"Nvidia-OpenJDK 8", "package":"nvidia-openjdk-8-jre", "icon":"nvidia", "path":"/usr/lib/jvm/nvidia-java-8-openjdk-amd64/bin/java" }, 
 ]
-gridWidth = 3
+gridColumnCount = 3
+
+import locale, os
+from locale import gettext as tr
+
+# Translation Constants:
+APPNAME = "pardus-java-installer"
+TRANSLATIONS_PATH = "/usr/share/locale"
+SYSTEM_LANGUAGE = os.environ.get("LANG")
+
+# Translation functions:
+locale.bindtextdomain(APPNAME, TRANSLATIONS_PATH)
+locale.textdomain(APPNAME)
+locale.setlocale(locale.LC_ALL, SYSTEM_LANGUAGE)
 
 
 class MainWindow:
     def __init__(self, application):
         # Gtk Builder
         self.builder = Gtk.Builder()
-        self.builder.add_from_file("../ui/MainWindow.glade")
+
+         # Translate things on glade:
+        self.builder.set_translation_domain(APPNAME)
+
+        self.builder.add_from_file(os.path.dirname(os.path.abspath(__file__)) + "/../ui/MainWindow.glade")
         self.builder.connect_signals(self)
 
         # Add Window
@@ -43,8 +62,10 @@ class MainWindow:
             box = Gtk.Box.new(orientation=Gtk.Orientation.VERTICAL, spacing=5)
             
             image = Gtk.Image.new_from_icon_name(packages[i]["icon"], 0)
-            image.set_pixel_size(72)
+            image.set_pixel_size(64)
             label = Gtk.Label.new(packages[i]["name"])
+            label.set_margin_top(7)
+            label.set_margin_bottom(7)
 
             # Install or Default button
             btn_install = Gtk.Button.new()
@@ -55,25 +76,25 @@ class MainWindow:
             isPackDefault = self.packageManager.isDefault(i)
 
             if not isPackInstalled:
-                btn_install.set_label("Yükle")
+                btn_install.set_label(tr("Install"))
+                btn_install.set_sensitive(True)
                 if btn_install.get_style_context().has_class("suggested-action"):
                     btn_install.get_style_context().remove_class("suggested-action")
-                btn_install.set_sensitive(True)
             elif not isPackDefault:
-                btn_install.set_label("Varsayılan Yap")
+                btn_install.set_label(tr("Make Default"))
+                btn_install.set_sensitive(True)
                 if not btn_install.get_style_context().has_class("suggested-action"):
                     btn_install.get_style_context().add_class("suggested-action")
-                btn_install.set_sensitive(True)
             else:
-                btn_install.set_label("Varsayılan")
+                btn_install.set_label(tr("Default"))
+                btn_install.set_sensitive(False)
                 if btn_install.get_style_context().has_class("suggested-action"):
                     btn_install.get_style_context().remove_class("suggested-action")
-                btn_install.set_sensitive(False)
             
 
             # Remove button:
             btn_remove = Gtk.Button.new()
-            btn_remove.set_label("Kaldır")
+            btn_remove.set_label(tr("Uninstall"))
             btn_remove.set_name(str(i)) # to idenfity which button has pressed
             btn_remove.connect("clicked", self.btn_remove_clicked)
             btn_remove.get_style_context().add_class("destructive-action")
@@ -84,7 +105,7 @@ class MainWindow:
             box.pack_start(btn_install, False, False, 0)
             box.pack_start(btn_remove, False, False, 0)
 
-            self.grid.attach(box, i % gridWidth, i / gridWidth, 1, 1)
+            self.grid.attach(box, i % gridColumnCount, i / gridColumnCount, 1, 1)
     
     def btn_install_clicked(self, button):
         self.window.set_sensitive(False)
@@ -110,20 +131,20 @@ class MainWindow:
             isPackDefault = self.packageManager.isDefault(i)
 
             if not isPackInstalled:
-                btn_install.set_label("Yükle")
+                btn_install.set_label(tr("Install"))
+                btn_install.set_sensitive(True)
                 if btn_install.get_style_context().has_class("suggested-action"):
                     btn_install.get_style_context().remove_class("suggested-action")
-                btn_install.set_sensitive(True)
             elif not isPackDefault:
-                btn_install.set_label("Varsayılan Yap")
+                btn_install.set_label(tr("Make Default"))
+                btn_install.set_sensitive(True)
                 if not btn_install.get_style_context().has_class("suggested-action"):
                     btn_install.get_style_context().add_class("suggested-action")
-                btn_install.set_sensitive(True)
             else:
-                btn_install.set_label("Varsayılan")
+                btn_install.set_label(tr("Default"))
+                btn_install.set_sensitive(False)
                 if btn_install.get_style_context().has_class("suggested-action"):
                     btn_install.get_style_context().remove_class("suggested-action")
-                btn_install.set_sensitive(False)
             
             btn_remove.set_sensitive(isPackInstalled)
 

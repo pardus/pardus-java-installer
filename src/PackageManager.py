@@ -109,5 +109,5 @@ class PackageManager:
         return True
 
     def onProcessExit(self, pid, status):
-        self.progressWindow.hide()
+        self.progressWindow.stopProgressAnimation()
         self.onProcessFinished()
