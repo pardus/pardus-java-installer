@@ -56,6 +56,7 @@ class MainWindow:
     def defineComponents(self):
         # Display:
         self.grid = self.builder.get_object("grid")
+        self.dialog_about = self.builder.get_object("dialog_about")
     
     def addApplicationListToGrid(self):
         for i in range(len(packages)):
@@ -114,6 +115,10 @@ class MainWindow:
     def btn_remove_clicked(self, button):
         self.window.set_sensitive(False)
         self.packageManager.remove(int(button.get_name()))
+
+    def btn_information_clicked(self, button):
+        self.dialog_about.run()
+        self.dialog_about.hide()
     
     def onProcessFinished(self):
         # Refresh default information

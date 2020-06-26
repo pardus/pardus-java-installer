@@ -46,3 +46,6 @@ msgstr "İşlem Tamamlandı."
 #: MainWindow.glade.h:1
 msgid "Pardus Java Installer"
 msgstr "Pardus Java Kurucu"
+
+msgid "Install & Manage Java versions easily."
+msgstr "Java sürümlerini kolayca yükleyin & yönetin."

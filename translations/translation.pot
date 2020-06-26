@@ -44,3 +44,6 @@ msgstr ""
 #: MainWindow.glade.h:1
 msgid "Pardus Java Installer"
 msgstr ""
+
+msgid "Install & Manage Java versions easily."
+msgstr ""
