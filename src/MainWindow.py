@@ -7,11 +7,10 @@ from PackageManager import PackageManager
 packages = [
     { "name":"OpenJDK 11", "package":"openjdk-11-jre", "icon":"openjdk-11", "path":"/usr/lib/jvm/java-11-openjdk-amd64/bin/java" },
     { "name":"OpenJDK 8", "package":"openjdk-8-jre", "icon":"openjdk-8", "path":"/usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java" },
-    { "name":"Oracle Java 11", "package":"oracle-jdk-11", "icon":"application-java", "path":"/usr/lib/jvm/jdk-11.0.7/bin/java" }, 
-    { "name":"Oracle Java 14", "package":"oracle-jdk-14", "icon":"application-java", "path":"/usr/lib/jvm/jdk-14.0.1/bin/java" },
+    #{ "name":"Oracle Java 11", "package":"oracle-jdk-11", "icon":"application-java", "path":"/usr/lib/jvm/jdk-11.0.7/bin/java" }, 
+    #{ "name":"Oracle Java 14", "package":"oracle-jdk-14", "icon":"application-java", "path":"/usr/lib/jvm/jdk-14.0.1/bin/java" },
     #{ "name":"Nvidia Cuda JDK 8", "package":"nvidia-openjdk-8-jre", "icon":"nvidia", "path":"/usr/lib/jvm/nvidia-java-8-openjdk-amd64/bin/java" }, 
 ]
-gridColumnCount = 3
 
 import locale, os
 from locale import gettext as tr
@@ -46,7 +45,7 @@ class MainWindow:
         self.defineComponents()
 
         # Prepare PackageManager
-        self.packageManager = PackageManager(packages, self.onProcessFinished, self.dlg_pb_percent, self.dialog_progress)
+        self.packageManager = PackageManager(packages, self.onProcessFinished, self.dlg_pb_percent, self.dialog_downloading, self.dialog_processing)
 
         # Show Screen:
         self.addApplicationListToGrid()
@@ -54,33 +53,34 @@ class MainWindow:
     
     def defineComponents(self):
         # Display:
-        self.grid = self.builder.get_object("grid")
+        self.fb_applications = self.builder.get_object("fb_applications")
         self.dialog_about = self.builder.get_object("dialog_about")
-        self.dialog_progress = self.builder.get_object("dialog_progress")
+        self.dialog_downloading = self.builder.get_object("dialog_downloading")
+        self.dialog_processing = self.builder.get_object("dialog_processing")
         self.dlg_pb_percent = self.builder.get_object("dlg_pb_percent")
         self.dlg_lbl_packageName = self.builder.get_object("dlg_lbl_packageName")
     
     def addApplicationListToGrid(self):
         for i in range(len(packages)):
-            box = Gtk.Box.new(orientation=Gtk.Orientation.VERTICAL, spacing=7)
+            box = Gtk.Box.new(orientation=Gtk.Orientation.VERTICAL, spacing=5)
+            box.set_size_request(96, -1)
             
             # Java Icon:
             javaIcon = Gtk.Image.new_from_icon_name(packages[i]["icon"], 0)
-            javaIcon.set_pixel_size(64)
+            javaIcon.set_pixel_size(72)
 
             # Label & Tick
             labelBox = Gtk.Box.new(orientation=Gtk.Orientation.HORIZONTAL, spacing=3)
             packageName = Gtk.Label.new(packages[i]["name"])
-            packageName.set_margin_top(7)
-            packageName.set_margin_bottom(7)
 
-            installedTick = Gtk.Image.new_from_icon_name("gtk-ok", 0)
+            installedTick = Gtk.Image.new_from_icon_name("dialog-ok", 0)
             installedTick.set_pixel_size(16)
             installedTick.set_halign(Gtk.Align.START)
             installedTick.set_no_show_all(True)
 
             labelBox.set_center_widget(packageName)
             labelBox.pack_end(installedTick, True, True, 0)
+            labelBox.set_margin_bottom(11)
 
 
             # Install or Default button
@@ -123,7 +123,7 @@ class MainWindow:
             box.pack_start(btn_install, False, False, 0)
             box.pack_start(btn_remove, False, False, 0)
 
-            self.grid.attach(box, i % gridColumnCount, i / gridColumnCount, 1, 1)
+            self.fb_applications.insert(box, -1)
     
     def btn_install_clicked(self, button):
         index = int(button.get_name())
@@ -132,7 +132,6 @@ class MainWindow:
     
     def btn_remove_clicked(self, button):
         index = int(button.get_name())
-        self.dlg_lbl_packageName.set_text(self.packageManager.packages[index]['name'])
         self.packageManager.remove(index)
 
     def btn_information_clicked(self, button):
@@ -143,15 +142,18 @@ class MainWindow:
         # Refresh default information
         self.packageManager.findDefault()
 
-        i = len(self.grid.get_children()) - 1
-        for a in range(len(self.grid.get_children())):
-            gridElement = self.grid.get_children()[a]
-            gridChildren = gridElement.get_children()
+        global packages
 
-            labelBox = gridChildren[1]
+        for i in range(len(packages)):
+            flowboxItem = self.fb_applications.get_child_at_index(i)
+            box = flowboxItem.get_child()
+
+            box_children = box.get_children()
+
+            labelBox = box_children[1]
             installedTick = labelBox.get_children()[1]
-            btn_install = gridChildren[2]
-            btn_remove = gridChildren[3]
+            btn_install = box_children[2]
+            btn_remove = box_children[3]
 
             isPackInstalled = self.packageManager.isInstalled(i)
             isPackDefault = self.packageManager.isDefault(i)
@@ -176,8 +178,6 @@ class MainWindow:
                     btn_install.get_style_context().remove_class("suggested-action")
             
             btn_remove.set_sensitive(isPackInstalled)
-
-            i = i - 1
         
         self.window.set_sensitive(True)
         self.window.show_all()

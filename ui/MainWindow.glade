@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.22.1 -->
+<!-- Generated with glade 3.22.2 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
   <object class="GtkAboutDialog" id="dialog_about">
@@ -10,7 +10,6 @@
     <property name="copyright" translatable="yes">TÜBİTAK ULAKBİM | ©2020</property>
     <property name="comments" translatable="yes">Install &amp; Manage Java versions easily.</property>
     <property name="website">https://www.pardus.org.tr</property>
-    <property name="website_label" translatable="yes">pardus.org.tr</property>
     <property name="authors">Emin Fedar</property>
     <property name="translator_credits" translatable="yes">Emin Fedar</property>
     <property name="logo">../icon.svg</property>
@@ -40,17 +39,18 @@
       </object>
     </child>
   </object>
-  <object class="GtkDialog" id="dialog_progress">
+  <object class="GtkDialog" id="dialog_downloading">
     <property name="can_focus">False</property>
-    <property name="title" translatable="yes">Processing...</property>
+    <property name="title" translatable="yes">Downloading</property>
+    <property name="resizable">False</property>
     <property name="modal">True</property>
     <property name="window_position">center</property>
     <property name="default_width">350</property>
     <property name="default_height">140</property>
     <property name="icon">../icon.svg</property>
-    <property name="type_hint">dock</property>
+    <property name="type_hint">dialog</property>
     <property name="gravity">center</property>
-    <child>
+    <child type="titlebar">
       <placeholder/>
     </child>
     <child internal-child="vbox">
@@ -98,10 +98,10 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="lbl_header">
+              <object class="GtkLabel">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Processing...</property>
+                <property name="label" translatable="yes">Downloading</property>
                 <attributes>
                   <attribute name="size" value="16000"/>
                 </attributes>
@@ -165,6 +165,88 @@
       </object>
     </child>
   </object>
+  <object class="GtkDialog" id="dialog_processing">
+    <property name="can_focus">False</property>
+    <property name="title" translatable="yes">Processing</property>
+    <property name="resizable">False</property>
+    <property name="modal">True</property>
+    <property name="window_position">center</property>
+    <property name="default_width">350</property>
+    <property name="default_height">140</property>
+    <property name="icon">../icon.svg</property>
+    <property name="type_hint">dialog</property>
+    <property name="gravity">center</property>
+    <child type="titlebar">
+      <placeholder/>
+    </child>
+    <child internal-child="vbox">
+      <object class="GtkBox">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="margin_top">7</property>
+            <property name="margin_bottom">7</property>
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkSpinner">
+                <property name="height_request">42</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="active">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Processing</property>
+                <attributes>
+                  <attribute name="size" value="16000"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="padding">4</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
   <object class="GtkImage" id="img_info">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -173,15 +255,15 @@
   <object class="GtkWindow" id="window">
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">Pardus Java Installer</property>
-    <property name="default_width">500</property>
-    <property name="default_height">260</property>
+    <property name="default_width">430</property>
+    <property name="default_height">220</property>
     <property name="icon">../icon.svg</property>
     <child type="titlebar">
       <object class="GtkHeaderBar">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="title" translatable="yes">Pardus Java Installer</property>
-        <property name="subtitle" translatable="yes">v0.1</property>
+        <property name="has_subtitle">False</property>
         <property name="show_close_button">True</property>
         <child>
           <object class="GtkButton" id="btn_information">
@@ -199,52 +281,37 @@
       <object class="GtkBox">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="margin_left">7</property>
-        <property name="margin_right">7</property>
-        <property name="margin_top">7</property>
         <property name="margin_bottom">7</property>
         <property name="orientation">vertical</property>
         <child>
-          <object class="GtkGrid" id="grid">
+          <object class="GtkScrolledWindow">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="orientation">vertical</property>
-            <property name="row_spacing">17</property>
-            <property name="column_spacing">17</property>
-            <property name="row_homogeneous">True</property>
-            <property name="column_homogeneous">True</property>
+            <property name="can_focus">True</property>
             <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
+              <object class="GtkViewport">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="shadow_type">none</property>
+                <child>
+                  <object class="GtkFlowBox" id="fb_applications">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="margin_left">7</property>
+                    <property name="margin_right">7</property>
+                    <property name="margin_top">7</property>
+                    <property name="margin_bottom">7</property>
+                    <property name="column_spacing">7</property>
+                    <property name="row_spacing">7</property>
+                    <property name="selection_mode">none</property>
+                  </object>
+                </child>
+              </object>
             </child>
           </object>
           <packing>
-            <property name="expand">False</property>
+            <property name="expand">True</property>
             <property name="fill">True</property>
-            <property name="position">2</property>
+            <property name="position">0</property>
           </packing>
         </child>
         <child>
