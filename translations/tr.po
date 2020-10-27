@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-13 22:40+0300\n"
-"PO-Revision-Date: 2020-06-13 22:42+0300\n"
+"POT-Creation-Date: 2020-10-27 12:33+0300\n"
+"PO-Revision-Date: 2020-10-27 12:37+0300\n"
 "Last-Translator: Emin Fedar <emin.fedar@pardus.org.tr>\n"
 "Language-Team: Turkish <gelistirici@pardus.org.tr>\n"
 "Language: tr\n"
@@ -17,35 +17,36 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
-"X-Generator: Gtranslator 3.36.0\n"
+"X-Generator: Gtranslator 3.38.0\n"
 
-#: MainWindow.py:58 MainWindow.py:113
+#: MainWindow.py:97 MainWindow.py:165
 msgid "Install"
-msgstr "Kur"
+msgstr "Yükle"
 
-#: MainWindow.py:63 MainWindow.py:118
+#: MainWindow.py:102 MainWindow.py:170
 msgid "Make Default"
 msgstr "Varsayılan Yap"
 
-#: MainWindow.py:68 MainWindow.py:123
+#: MainWindow.py:107 MainWindow.py:175
 msgid "Default"
 msgstr "Varsayılan"
 
-#: MainWindow.py:76
+#: MainWindow.py:115
 msgid "Uninstall"
 msgstr "Kaldır"
 
-#: ProgressWindow.py:43
-msgid "Processing..."
-msgstr "İşlem Gerçekleştiriliyor..."
-
-#: ProgressWindow.py:51
-msgid "Process Done."
-msgstr "İşlem Tamamlandı."
-
-#: MainWindow.glade.h:1
-msgid "Pardus Java Installer"
-msgstr "Pardus Java Kurucu"
-
+#: MainWindow.glade:11
 msgid "Install & Manage Java versions easily."
 msgstr "Java sürümlerini kolayca yükleyin & yönetin."
+
+#: MainWindow.glade:44 MainWindow.glade:104
+msgid "Downloading"
+msgstr "İndiriliyor"
+
+#: MainWindow.glade:170 MainWindow.glade:228
+msgid "Processing"
+msgstr "İşlem Gerçekleştiriliyor"
+
+#: MainWindow.glade:257 MainWindow.glade:265
+msgid "Pardus Java Installer"
+msgstr "Pardus Java Kurucu"
