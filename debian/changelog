@@ -1,0 +1,17 @@
+pardus-java-installer (0.1.0) unstable; urgency=medium
+
+  * Initial commit
+  * Alpha version works
+  * Disable MainWindow while instaling
+  * Auto Scroll to bottom
+  * Header Label in MainWindow
+  * UI Improvements
+  * setup.py, desktop file, icon
+  * Turkish Translations
+  * application_id updated
+  * ProgressWindow localized & not closing after finished.
+  * About dialog
+  * New Processing dialog
+  * Setup & Permissions
+  * Translation fixes
+ -- Emin Fedar <emin.fedar@pardus.org.tr>  Thu, 8 Oct 2020 00:04:20 +0300
