@@ -3,12 +3,14 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import GLib, Gio, Gtk
 
 class PackageManager:
-    def __init__(self, packages, onProcessFinished, dlg_pb_percent, dialog_progress):
+    def __init__(self, packages, onProcessFinished, dlg_pb_percent, dialog_downloading, dialog_processing):
         # Get packages array
         self.packages = packages
         self.onProcessFinished = onProcessFinished
         self.dlg_pb_percent = dlg_pb_percent
-        self.dialog_progress = dialog_progress
+        self.dialog_downloading = dialog_downloading
+        self.dialog_processing = dialog_processing
+        self.defaultJavaPath = ""
 
         # Commands
         self.installCommand = ["pkexec", "apt-get", "install", "--PACKAGE--" , "-yq", "-o", "APT::Status-Fd=1"]
@@ -29,12 +31,18 @@ class PackageManager:
             # Make default
             makeDefaultCommand = self.makeDefaultCommand
             makeDefaultCommand[4] = pack['path']
+
             self.startProcess(makeDefaultCommand)
+            self.dialog_processing.run()
         else:
             # Install
             installCommand = self.installCommand
             installCommand[3] = pack['package']
+
             self.startProcess(installCommand)
+
+            self.dlg_pb_percent.set_fraction(0)
+            self.dialog_downloading.run()
     
     def remove(self, packageIndex):
         pack = self.packages[packageIndex]
@@ -42,11 +50,15 @@ class PackageManager:
         if self.isDefault(packageIndex):
             updateAndRemoveCommand = self.updateAndRemoveCommand
             updateAndRemoveCommand[3] = updateAndRemoveCommand[3].replace("--PACKAGE--", pack['package'] + "*")
+            
             self.startProcess(updateAndRemoveCommand)
+            self.dialog_processing.run()
         else:
             removeCommand = self.removeCommand
             removeCommand[3] = pack['package'] + "*"
+
             self.startProcess(removeCommand)
+            self.dialog_processing.run()
 
     def onProgress(self, percent):
         self.dlg_pb_percent.set_fraction(float(percent) / 100)
@@ -87,9 +99,6 @@ class PackageManager:
         GLib.io_add_watch(GLib.IOChannel(stdout), GLib.IO_IN | GLib.IO_HUP, self.onProcessStdout)
         GLib.io_add_watch(GLib.IOChannel(stderr), GLib.IO_IN | GLib.IO_HUP, self.onProcessStderr)
         GLib.child_watch_add(GLib.PRIORITY_DEFAULT, pid, self.onProcessExit)
-        
-        self.dlg_pb_percent.set_fraction(0)
-        self.dialog_progress.run()
     
     def startProcessSync(self, params):
         return GLib.spawn_sync(None, params, None, GLib.SPAWN_SEARCH_PATH)
@@ -99,7 +108,7 @@ class PackageManager:
             return False
 
         line = source.readline()
-        print(line)
+        print(f"[stdout]: {line.rstrip()}")
         if 'dlstatus' in line.split(':'):
             self.onProgress(line.split(':')[2])
         return True
@@ -111,6 +120,7 @@ class PackageManager:
         return True
 
     def onProcessExit(self, pid, status):
-        print(status)
-        self.dialog_progress.hide()
+        print(f"Status: {status}")
+        self.dialog_downloading.hide()
+        self.dialog_processing.hide()
         self.onProcessFinished()
