@@ -7,11 +7,11 @@
     <property name="type_hint">dialog</property>
     <property name="program_name">Pardus Java Installer</property>
     <property name="version">v0.1</property>
-    <property name="copyright" translatable="yes">TÜBİTAK ULAKBİM | ©2020</property>
+    <property name="copyright">TÜBİTAK ULAKBİM | ©2020</property>
     <property name="comments" translatable="yes">Install &amp; Manage Java versions easily.</property>
     <property name="website">https://www.pardus.org.tr</property>
     <property name="authors">Emin Fedar</property>
-    <property name="translator_credits" translatable="yes">Emin Fedar</property>
+    <property name="translator_credits">Emin Fedar</property>
     <property name="logo">../icon.svg</property>
     <property name="license_type">gpl-3-0</property>
     <child type="titlebar">
