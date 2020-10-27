@@ -45,7 +45,7 @@ class MainWindow:
         self.defineComponents()
 
         # Prepare PackageManager
-        self.packageManager = PackageManager(packages, self.onProcessFinished, self.dlg_pb_percent, self.dialog_downloading, self.dialog_processing)
+        self.packageManager = PackageManager(packages, self.onProcessFinished, self.pb_percent, self.stk_pages)
 
         # Show Screen:
         self.addApplicationListToGrid()
@@ -54,11 +54,12 @@ class MainWindow:
     def defineComponents(self):
         # Display:
         self.fb_applications = self.builder.get_object("fb_applications")
+        self.stk_pages = self.builder.get_object("stk_pages")
+
         self.dialog_about = self.builder.get_object("dialog_about")
-        self.dialog_downloading = self.builder.get_object("dialog_downloading")
-        self.dialog_processing = self.builder.get_object("dialog_processing")
-        self.dlg_pb_percent = self.builder.get_object("dlg_pb_percent")
-        self.dlg_lbl_packageName = self.builder.get_object("dlg_lbl_packageName")
+
+        self.pb_percent = self.builder.get_object("pb_percent")
+        self.lbl_packageName = self.builder.get_object("lbl_packageName")
     
     def addApplicationListToGrid(self):
         for i in range(len(packages)):
@@ -127,7 +128,7 @@ class MainWindow:
     
     def btn_install_clicked(self, button):
         index = int(button.get_name())
-        self.dlg_lbl_packageName.set_text(self.packageManager.packages[index]['name'])
+        self.lbl_packageName.set_text(self.packageManager.packages[index]['name'])
         self.packageManager.installOrMakeDefault(index)
     
     def btn_remove_clicked(self, button):

@@ -3,13 +3,12 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import GLib, Gio, Gtk
 
 class PackageManager:
-    def __init__(self, packages, onProcessFinished, dlg_pb_percent, dialog_downloading, dialog_processing):
+    def __init__(self, packages, onProcessFinished, pb_percent, stk_pages):
         # Get packages array
         self.packages = packages
         self.onProcessFinished = onProcessFinished
-        self.dlg_pb_percent = dlg_pb_percent
-        self.dialog_downloading = dialog_downloading
-        self.dialog_processing = dialog_processing
+        self.pb_percent = pb_percent
+        self.stk_pages = stk_pages
         self.defaultJavaPath = ""
 
         # Commands
@@ -33,7 +32,7 @@ class PackageManager:
             makeDefaultCommand[4] = pack['path']
 
             self.startProcess(makeDefaultCommand)
-            self.dialog_processing.run()
+            self.stk_pages.set_visible_child_name("page_processing")
         else:
             # Install
             installCommand = self.installCommand
@@ -41,8 +40,8 @@ class PackageManager:
 
             self.startProcess(installCommand)
 
-            self.dlg_pb_percent.set_fraction(0)
-            self.dialog_downloading.run()
+            self.pb_percent.set_fraction(0)
+            self.stk_pages.set_visible_child_name("page_downloading")
     
     def remove(self, packageIndex):
         pack = self.packages[packageIndex]
@@ -52,13 +51,13 @@ class PackageManager:
             updateAndRemoveCommand[3] = updateAndRemoveCommand[3].replace("--PACKAGE--", pack['package'] + "*")
             
             self.startProcess(updateAndRemoveCommand)
-            self.dialog_processing.run()
+            self.stk_pages.set_visible_child_name("page_processing")
         else:
             removeCommand = self.removeCommand
             removeCommand[3] = pack['package'] + "*"
 
             self.startProcess(removeCommand)
-            self.dialog_processing.run()
+            self.stk_pages.set_visible_child_name("page_processing")
 
     def onProgress(self, percent):
         self.dlg_pb_percent.set_fraction(float(percent) / 100)
@@ -121,6 +120,6 @@ class PackageManager:
 
     def onProcessExit(self, pid, status):
         print(f"Status: {status}")
-        self.dialog_downloading.hide()
-        self.dialog_processing.hide()
+        
+        self.stk_pages.set_visible_child_name("page_main")
         self.onProcessFinished()
