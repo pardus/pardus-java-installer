@@ -139,12 +139,20 @@ class MainWindow:
         self.dialog_about.run()
         self.dialog_about.hide()
     
-    def onProcessFinished(self):
+    def btn_apt_ok_clicked(self, button):
+        self.stk_pages.set_visible_child_name("page_main")
+    
+    def onProcessFinished(self, status):
+        if status == 25600:
+            self.stk_pages.set_visible_child_name("page_apt_busy")
+        else:
+            self.stk_pages.set_visible_child_name("page_main")
+        print(status)
+        
         # Refresh default information
         self.packageManager.findDefault()
 
         global packages
-
         for i in range(len(packages)):
             flowboxItem = self.fb_applications.get_child_at_index(i)
             box = flowboxItem.get_child()
