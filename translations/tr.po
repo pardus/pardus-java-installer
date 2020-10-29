@@ -50,3 +50,13 @@ msgstr "İşlem Gerçekleştiriliyor"
 #: MainWindow.glade:257 MainWindow.glade:265
 msgid "Pardus Java Installer"
 msgstr "Pardus Java Kurucu"
+
+msgid "Apt is busy."
+msgstr "Apt meşgul."
+
+msgid ""
+"Apt is using by an another program.\n"
+"Please close it and try again."
+msgstr ""
+"Apt'yi başka bir program kullanıyor.\n"
+"Lütfen kapatın ve tekrar deneyin."

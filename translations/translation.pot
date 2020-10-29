@@ -48,3 +48,11 @@ msgstr ""
 #: MainWindow.glade:257 MainWindow.glade:265
 msgid "Pardus Java Installer"
 msgstr ""
+
+msgid "Apt is busy."
+msgstr ""
+
+msgid ""
+"Apt is using by an another program.\n"
+"Please close it and try again."
+msgstr ""
