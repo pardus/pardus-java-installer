@@ -14,4 +14,6 @@ pardus-java-installer (0.1.0~Beta1) unstable; urgency=medium
   * New Processing dialog
   * Setup & Permissions
   * Translation fixes
- -- Emin Fedar <emin.fedar@pardus.org.tr>  Thu, 8 Oct 2020 00:04:20 +0300
+  * New Icon
+
+ -- Emin Fedar <emin.fedar@pardus.org.tr>  Mon, 02 Nov 2020 23:31:49 +0300
