@@ -47,6 +47,14 @@ class MainWindow:
         # Prepare PackageManager
         self.packageManager = PackageManager(packages, self.onProcessFinished, self.pb_percent, self.stk_pages)
 
+        # Set version
+        # If not getted from __version__ file then accept version in MainWindow.glade file
+        try:
+            version = open(os.path.dirname(os.path.abspath(__file__)) + "/__version__").readline()
+            self.dialog_about.set_version(version)
+        except:
+            pass
+
         # Show Screen:
         self.addApplicationListToGrid()
         self.window.show_all()
