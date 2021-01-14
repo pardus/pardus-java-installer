@@ -15,5 +15,6 @@ pardus-java-installer (0.1.0~Beta1) unstable; urgency=medium
   * Setup & Permissions
   * Translation fixes
   * New Icon
+  * Added oracle-java8-jdk support
 
  -- Emin Fedar <emin.fedar@pardus.org.tr>  Mon, 02 Nov 2020 23:31:49 +0300
