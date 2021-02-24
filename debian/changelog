@@ -1,3 +1,10 @@
+pardus-java-installer (0.1.0~Beta2) unstable; urgency=medium
+
+  * Added oracle-java8-jdk
+  * changelog
+
+ -- Emin Fedar <emin.fedar@pardus.org.tr>  Thu, 14 Jan 2021 17:28:35 +0300
+
 pardus-java-installer (0.1.0~Beta1) unstable; urgency=medium
 
   * Initial commit
