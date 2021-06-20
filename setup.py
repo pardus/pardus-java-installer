@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from setuptools import setup, find_packages,os
+from shutil import copyfile
 
 changelog = 'debian/changelog'
 version = ""
@@ -13,6 +14,8 @@ if os.path.exists(changelog):
     f.write(version)
     f.close()
 
+copyfile("icon.svg", "pardus-java-installer.svg")
+
 data_files = [
     ("/usr/share/applications/", ["tr.org.pardus.java-installer.desktop"]),
     ("/usr/share/locale/tr/LC_MESSAGES/", ["translations/tr/LC_MESSAGES/pardus-java-installer.mo"]),
@@ -21,6 +24,7 @@ data_files = [
     ("/usr/share/pardus/pardus-java-installer/ui", ["ui/MainWindow.glade"]),
     ("/usr/share/polkit-1/actions", ["tr.org.pardus.pkexec.pardus-java-installer.policy"]),
     ("/usr/bin/", ["pardus-java-installer"]),
+    ("/usr/share/icons/hicolor/scalable/apps/", ["pardus-java-installer.svg"])
 ]
 
 setup(
