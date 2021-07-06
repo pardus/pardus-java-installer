@@ -4,14 +4,12 @@ from gi.repository import GLib, Gio, Gtk
 
 from PackageManager import PackageManager
 
-packages = [
-    { "name":"OpenJDK 11", "package":"openjdk-11-jre", "icon":"openjdk-11", "path":"/usr/lib/jvm/java-11-openjdk-amd64/bin/java" },
-    { "name":"OpenJDK 8", "package":"openjdk-8-jre", "icon":"openjdk-8", "path":"/usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java" },
-    { "name":"Oracle Java 8", "package":"oracle-java8-jdk", "icon":"application-java", "path":"/usr/lib/jvm/oracle-java8-jdk-amd64/jre/bin/java" }, 
-    #{ "name":"Oracle Java 11", "package":"oracle-jdk-11", "icon":"application-java", "path":"/usr/lib/jvm/jdk-11.0.7/bin/java" }, 
-    #{ "name":"Oracle Java 14", "package":"oracle-jdk-14", "icon":"application-java", "path":"/usr/lib/jvm/jdk-14.0.1/bin/java" },
-    #{ "name":"Nvidia Cuda JDK 8", "package":"nvidia-openjdk-8-jre", "icon":"nvidia", "path":"/usr/lib/jvm/nvidia-java-8-openjdk-amd64/bin/java" }, 
-]
+packages = {
+    "openjdk_17" :  { "package": "openjdk-17-jre",  "path": "/usr/lib/jvm/java-17-openjdk-amd64/bin/java" },
+    "openjdk_11" :  { "package": "openjdk-11-jre",  "path": "/usr/lib/jvm/java-11-openjdk-amd64/bin/java" },
+    "openjdk_8" :   { "package": "openjdk-8-jre",   "path": "/usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java" },
+    "oracle_8" :    { "package": "oracle-java8-jdk","path": "/usr/lib/jvm/oracle-java8-jre/bin/java" },
+}
 
 import locale, os
 from locale import gettext as tr
@@ -46,10 +44,10 @@ class MainWindow:
         self.defineComponents()
 
         # Prepare PackageManager
-        self.packageManager = PackageManager(packages, self.onProcessFinished, self.pb_percent, self.stk_pages)
+        self.packageManager = PackageManager(self.onProcessFinished, self.pb_percent, self.stk_pages)
 
         # Set version
-        # If not getted from __version__ file then accept version in MainWindow.glade file
+        # If haven't got from __version__ file then accept version in MainWindow.glade file
         try:
             version = open(os.path.dirname(os.path.abspath(__file__)) + "/__version__").readline()
             self.dialog_about.set_version(version)
@@ -57,7 +55,7 @@ class MainWindow:
             pass
 
         # Show Screen:
-        self.addApplicationListToGrid()
+        self.refreshGUI()
         self.window.show_all()
     
     def defineComponents(self):
@@ -69,80 +67,84 @@ class MainWindow:
 
         self.pb_percent = self.builder.get_object("pb_percent")
         self.lbl_packageName = self.builder.get_object("lbl_packageName")
+
+        # Buttons:
+        self.btn_uninstall_openjdk_17 = self.builder.get_object("btn_uninstall_openjdk_17")
+        self.btn_uninstall_openjdk_11 = self.builder.get_object("btn_uninstall_openjdk_11")
+        self.btn_uninstall_openjdk_8  = self.builder.get_object("btn_uninstall_openjdk_8")
+        self.btn_uninstall_oracle_8   = self.builder.get_object("btn_uninstall_oracle_8")
+
+        # Button Stacks:
+        self.stk_openjdk_17 = self.builder.get_object("stk_openjdk_17")
+        self.stk_openjdk_11 = self.builder.get_object("stk_openjdk_11")
+        self.stk_openjdk_8 = self.builder.get_object("stk_openjdk_8")
+        self.stk_oracle_8 = self.builder.get_object("stk_oracle_8")
     
-    def addApplicationListToGrid(self):
-        for i in range(len(packages)):
-            box = Gtk.Box.new(orientation=Gtk.Orientation.VERTICAL, spacing=5)
-            box.set_size_request(96, -1)
-            
-            # Java Icon:
-            javaIcon = Gtk.Image.new_from_icon_name(packages[i]["icon"], 0)
-            javaIcon.set_pixel_size(72)
+    def refreshGUI(self):
+        # Refresh default information
+        self.packageManager.findDefault()
 
-            # Label & Tick
-            labelBox = Gtk.Box.new(orientation=Gtk.Orientation.HORIZONTAL, spacing=3)
-            packageName = Gtk.Label.new(packages[i]["name"])
+        global packages
+        # Uninstall button refresh
+        self.btn_uninstall_openjdk_17.set_sensitive(self.packageManager.isInstalled(packages["openjdk_17"]))
+        self.btn_uninstall_openjdk_11.set_sensitive(self.packageManager.isInstalled(packages["openjdk_11"]))
+        self.btn_uninstall_openjdk_8.set_sensitive(self.packageManager.isInstalled(packages["openjdk_8"]))
+        self.btn_uninstall_oracle_8.set_sensitive(self.packageManager.isInstalled(packages["oracle_8"]))
 
-            installedTick = Gtk.Image.new_from_icon_name("dialog-ok", 0)
-            installedTick.set_pixel_size(16)
-            installedTick.set_halign(Gtk.Align.START)
-            installedTick.set_no_show_all(True)
+        # Set default button stack
+        openjdk_17_installed = self.packageManager.isInstalled(packages["openjdk_17"])
+        openjdk_17_default = self.packageManager.isDefault(packages["openjdk_17"])
+        if not openjdk_17_installed:
+            self.stk_openjdk_17.set_visible_child_name("install")
+        elif not openjdk_17_default:
+            self.stk_openjdk_17.set_visible_child_name("setdefault")
+        else:
+            self.stk_openjdk_17.set_visible_child_name("default")
 
-            labelBox.set_center_widget(packageName)
-            labelBox.pack_end(installedTick, True, True, 0)
-            labelBox.set_margin_bottom(11)
+        openjdk_11_installed = self.packageManager.isInstalled(packages["openjdk_11"])
+        openjdk_11_default = self.packageManager.isDefault(packages["openjdk_11"])
+        if not openjdk_11_installed:
+            self.stk_openjdk_11.set_visible_child_name("install")
+        elif not openjdk_11_default:
+            self.stk_openjdk_11.set_visible_child_name("setdefault")
+        else:
+            self.stk_openjdk_11.set_visible_child_name("default")
 
+        openjdk_8_installed = self.packageManager.isInstalled(packages["openjdk_8"])
+        openjdk_8_default = self.packageManager.isDefault(packages["openjdk_8"])
+        if not openjdk_8_installed:
+            self.stk_openjdk_8.set_visible_child_name("install")
+        elif not openjdk_8_default:
+            self.stk_openjdk_8.set_visible_child_name("setdefault")
+        else:
+            self.stk_openjdk_8.set_visible_child_name("default")
 
-            # Install or Default button
-            btn_install = Gtk.Button.new()
-            btn_install.set_name(str(i)) # to identify which button has pressed
-            btn_install.connect("clicked", self.btn_install_clicked)
-
-            isPackInstalled = self.packageManager.isInstalled(i)
-            isPackDefault = self.packageManager.isDefault(i)
-
-            installedTick.set_visible(isPackDefault)
-
-            if not isPackInstalled:
-                btn_install.set_label(tr("Install"))
-                btn_install.set_sensitive(True)
-                if btn_install.get_style_context().has_class("suggested-action"):
-                    btn_install.get_style_context().remove_class("suggested-action")
-            elif not isPackDefault:
-                btn_install.set_label(tr("Make Default"))
-                btn_install.set_sensitive(True)
-                if not btn_install.get_style_context().has_class("suggested-action"):
-                    btn_install.get_style_context().add_class("suggested-action")
-            else:
-                btn_install.set_label(tr("Default"))
-                btn_install.set_sensitive(False)
-                if btn_install.get_style_context().has_class("suggested-action"):
-                    btn_install.get_style_context().remove_class("suggested-action")
-            
-
-            # Remove button:
-            btn_remove = Gtk.Button.new()
-            btn_remove.set_label(tr("Uninstall"))
-            btn_remove.set_name(str(i)) # to idenfity which button has pressed
-            btn_remove.connect("clicked", self.btn_remove_clicked)
-            btn_remove.get_style_context().add_class("destructive-action")
-            btn_remove.set_sensitive(isPackInstalled)
-
-            box.pack_start(javaIcon, True, True, 0)
-            box.pack_start(labelBox, True, True, 0)
-            box.pack_start(btn_install, False, False, 0)
-            box.pack_start(btn_remove, False, False, 0)
-
-            self.fb_applications.insert(box, -1)
+        oracle_8_installed = self.packageManager.isInstalled(packages["oracle_8"])
+        oracle_8_default = self.packageManager.isDefault(packages["oracle_8"])
+        if not oracle_8_installed:
+            self.stk_oracle_8.set_visible_child_name("install")
+        elif not oracle_8_default:
+            self.stk_oracle_8.set_visible_child_name("setdefault")
+        else:
+            self.stk_oracle_8.set_visible_child_name("default")
     
-    def btn_install_clicked(self, button):
-        index = int(button.get_name())
-        self.lbl_packageName.set_text(self.packageManager.packages[index]['name'])
-        self.packageManager.installOrMakeDefault(index)
+    # Installations Signals:
+    def on_btn_install_clicked(self, button):
+        package = button.get_name() # like openjdk_11, openjdk_17, oracle_8
+        
+        self.packageManager.install(packages[package])
     
-    def btn_remove_clicked(self, button):
-        index = int(button.get_name())
-        self.packageManager.remove(index)
+    def on_btn_uninstall_clicked(self, button):
+        package = button.get_name() # like openjdk_11, openjdk_17, oracle_8
+
+        self.packageManager.uninstall(packages[package])
+    
+    def on_btn_default_clicked(self, button):
+        package = button.get_name() # like openjdk_11, openjdk_17, oracle_8
+
+        self.packageManager.set_as_default(packages[package])
+    
+
 
     def btn_information_clicked(self, button):
         self.dialog_about.run()
@@ -158,44 +160,8 @@ class MainWindow:
             self.stk_pages.set_visible_child_name("page_main")
         print(status)
         
-        # Refresh default information
-        self.packageManager.findDefault()
-
-        global packages
-        for i in range(len(packages)):
-            flowboxItem = self.fb_applications.get_child_at_index(i)
-            box = flowboxItem.get_child()
-
-            box_children = box.get_children()
-
-            labelBox = box_children[1]
-            installedTick = labelBox.get_children()[1]
-            btn_install = box_children[2]
-            btn_remove = box_children[3]
-
-            isPackInstalled = self.packageManager.isInstalled(i)
-            isPackDefault = self.packageManager.isDefault(i)
-
-            # Show tick
-            installedTick.set_visible(isPackDefault)
-
-            if not isPackInstalled:
-                btn_install.set_label(tr("Install"))
-                btn_install.set_sensitive(True)
-                if btn_install.get_style_context().has_class("suggested-action"):
-                    btn_install.get_style_context().remove_class("suggested-action")
-            elif not isPackDefault:
-                btn_install.set_label(tr("Make Default"))
-                btn_install.set_sensitive(True)
-                if not btn_install.get_style_context().has_class("suggested-action"):
-                    btn_install.get_style_context().add_class("suggested-action")
-            else:
-                btn_install.set_label(tr("Default"))
-                btn_install.set_sensitive(False)
-                if btn_install.get_style_context().has_class("suggested-action"):
-                    btn_install.get_style_context().remove_class("suggested-action")
-            
-            btn_remove.set_sensitive(isPackInstalled)
+        self.refreshGUI()
         
         self.window.set_sensitive(True)
         self.window.show_all()
+    

@@ -4,9 +4,8 @@ from gi.repository import GLib, Gio, Gtk
 import os, sys
 
 class PackageManager:
-    def __init__(self, packages, onProcessFinished, pb_percent, stk_pages):
+    def __init__(self, onProcessFinished, pb_percent, stk_pages):
         # Get packages array
-        self.packages = packages
         self.onProcessFinished = onProcessFinished
         self.pb_percent = pb_percent
         self.stk_pages = stk_pages
@@ -28,39 +27,33 @@ class PackageManager:
 
         # Get initialize infos:
         self.findDefault()
-
-    def installOrMakeDefault(self, packageIndex):
-        pack = self.packages[packageIndex]
-
-        if self.isInstalled(packageIndex):
-            # Make default
-            makeDefaultCommand = self.makeDefaultCommand
-            makeDefaultCommand[3] = pack['path']
-
-            self.startProcess(makeDefaultCommand)
-            #self.stk_pages.set_visible_child_name("page_processing")
-        else:
-            # Install
-            installCommand = self.installCommand
-            installCommand[3] = pack['package']
-
-            self.startProcess(installCommand)
-
-            self.pb_percent.set_fraction(0)
-            self.stk_pages.set_visible_child_name("page_downloading")
+            
     
-    def remove(self, packageIndex):
-        pack = self.packages[packageIndex]
+    def install(self, packageObject):
+        installCommand = self.installCommand
+        installCommand[3] = packageObject["package"]
 
-        if self.isDefault(packageIndex):
+        self.startProcess(installCommand)
+
+        self.pb_percent.set_fraction(0)
+        self.stk_pages.set_visible_child_name("page_downloading")
+
+    def set_as_default(self, packageObject):
+        makeDefaultCommand = self.makeDefaultCommand
+        makeDefaultCommand[3] = packageObject["path"]
+
+        self.startProcess(makeDefaultCommand)
+    
+    def uninstall(self, packageObject):
+        if self.isDefault(packageObject):
             updateAndRemoveCommand = self.updateAndRemoveCommand
-            updateAndRemoveCommand[3] = updateAndRemoveCommand[3].replace("--PACKAGE--", pack['package'] + "*")
+            updateAndRemoveCommand[3] = updateAndRemoveCommand[3].replace("--PACKAGE--", packageObject["package"] + "*")
             
             self.startProcess(updateAndRemoveCommand)
             self.stk_pages.set_visible_child_name("page_processing")
         else:
             removeCommand = self.removeCommand
-            removeCommand[3] = pack['package'] + "*"
+            removeCommand[3] = packageObject["package"] + "*"
 
             self.startProcess(removeCommand)
             self.stk_pages.set_visible_child_name("page_processing")
@@ -68,18 +61,17 @@ class PackageManager:
     def onProgress(self, percent):
         self.pb_percent.set_fraction(float(percent) / 100)
 
-    # CHECK BOOLEANS:
-    def isInstalled(self, packageIndex):
-        pack = self.packages[packageIndex]
 
+
+    # CHECK BOOLEANS:
+    def isInstalled(self, packageObject):
         isInstalledCommand = self.isInstalledCommand
-        isInstalledCommand[2] = pack['package']
+        isInstalledCommand[2] = packageObject["package"]
         _, stdout, stderr, exit_status = self.startProcessSync(isInstalledCommand)
         return exit_status == 0
 
-    def isDefault(self, packageIndex):
-        pack = self.packages[packageIndex]
-        return pack['path'] == self.defaultJavaPath
+    def isDefault(self, packageObject):
+        return packageObject["path"] == self.defaultJavaPath
 
     
 
