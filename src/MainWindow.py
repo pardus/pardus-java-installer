@@ -1,14 +1,15 @@
 import gi
+
 gi.require_version('Gtk', '3.0')
 from gi.repository import GLib, Gio, Gtk
 
 from PackageManager import PackageManager
 
 packages = {
-    "openjdk_17" :  { "package": "openjdk-17-jre",  "path": "/usr/lib/jvm/java-17-openjdk-amd64/bin/java" },
-    "openjdk_11" :  { "package": "openjdk-11-jre",  "path": "/usr/lib/jvm/java-11-openjdk-amd64/bin/java" },
-    "openjdk_8" :   { "package": "openjdk-8-jre",   "path": "/usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java" },
-    "oracle_8" :    { "package": "oracle-java8-jdk","path": "/usr/lib/jvm/oracle-java8-jdk-amd64/jre/bin/java" },
+    "openjdk_17": {"package": "openjdk-17-jre", "path": "/usr/lib/jvm/java-17-openjdk-amd64/bin/java"},
+    "openjdk_11": {"package": "openjdk-11-jre", "path": "/usr/lib/jvm/java-11-openjdk-amd64/bin/java"},
+    "openjdk_8": {"package": "openjdk-8-jre", "path": "/usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java"},
+    "oracle_8": {"package": "oracle-java8-jdk", "path": "/usr/lib/jvm/oracle-java8-jdk-amd64/jre/bin/java"},
 }
 
 import locale, os
@@ -30,7 +31,7 @@ class MainWindow:
         # Gtk Builder
         self.builder = Gtk.Builder()
 
-         # Translate things on glade:
+        # Translate things on glade:
         self.builder.set_translation_domain(APPNAME)
 
         self.builder.add_from_file(os.path.dirname(os.path.abspath(__file__)) + "/../ui/MainWindow.glade")
@@ -57,7 +58,7 @@ class MainWindow:
         # Show Screen:
         self.refreshGUI()
         self.window.show_all()
-    
+
     def defineComponents(self):
         # Display:
         self.fb_applications = self.builder.get_object("fb_applications")
@@ -71,15 +72,15 @@ class MainWindow:
         # Buttons:
         self.btn_uninstall_openjdk_17 = self.builder.get_object("btn_uninstall_openjdk_17")
         self.btn_uninstall_openjdk_11 = self.builder.get_object("btn_uninstall_openjdk_11")
-        self.btn_uninstall_openjdk_8  = self.builder.get_object("btn_uninstall_openjdk_8")
-        self.btn_uninstall_oracle_8   = self.builder.get_object("btn_uninstall_oracle_8")
+        self.btn_uninstall_openjdk_8 = self.builder.get_object("btn_uninstall_openjdk_8")
+        self.btn_uninstall_oracle_8 = self.builder.get_object("btn_uninstall_oracle_8")
 
         # Button Stacks:
         self.stk_openjdk_17 = self.builder.get_object("stk_openjdk_17")
         self.stk_openjdk_11 = self.builder.get_object("stk_openjdk_11")
         self.stk_openjdk_8 = self.builder.get_object("stk_openjdk_8")
         self.stk_oracle_8 = self.builder.get_object("stk_oracle_8")
-    
+
     def refreshGUI(self):
         # Refresh default information
         self.packageManager.findDefault()
@@ -127,41 +128,38 @@ class MainWindow:
             self.stk_oracle_8.set_visible_child_name("setdefault")
         else:
             self.stk_oracle_8.set_visible_child_name("default")
-    
+
     # Installations Signals:
     def on_btn_install_clicked(self, button):
-        package = button.get_name() # like openjdk_11, openjdk_17, oracle_8
-        
+        package = button.get_name()  # like openjdk_11, openjdk_17, oracle_8
+
         self.packageManager.install(packages[package])
-    
+
     def on_btn_uninstall_clicked(self, button):
-        package = button.get_name() # like openjdk_11, openjdk_17, oracle_8
+        package = button.get_name()  # like openjdk_11, openjdk_17, oracle_8
 
         self.packageManager.uninstall(packages[package])
-    
+
     def on_btn_default_clicked(self, button):
-        package = button.get_name() # like openjdk_11, openjdk_17, oracle_8
+        package = button.get_name()  # like openjdk_11, openjdk_17, oracle_8
 
         self.packageManager.set_as_default(packages[package])
-    
-
 
     def btn_information_clicked(self, button):
         self.dialog_about.run()
         self.dialog_about.hide()
-    
+
     def btn_apt_ok_clicked(self, button):
         self.stk_pages.set_visible_child_name("page_main")
-    
+
     def onProcessFinished(self, status):
         if status == 25600:
             self.stk_pages.set_visible_child_name("page_apt_busy")
         else:
             self.stk_pages.set_visible_child_name("page_main")
         print(status)
-        
+
         self.refreshGUI()
-        
+
         self.window.set_sensitive(True)
         self.window.show_all()
-    

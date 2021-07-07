@@ -1,7 +1,9 @@
 import gi
+
 gi.require_version('Gtk', '3.0')
 from gi.repository import GLib, Gio, Gtk
 import os, sys
+
 
 class PackageManager:
     def __init__(self, onProcessFinished, pb_percent, stk_pages):
@@ -15,11 +17,12 @@ class PackageManager:
         currentPath = os.path.dirname(os.path.abspath(__file__))
 
         # - Installation commands
-        self.installCommand = ["/usr/bin/pkexec", currentPath + "/Actions.py", "install", "--PACKAGE--"] 
+        self.installCommand = ["/usr/bin/pkexec", currentPath + "/Actions.py", "install", "--PACKAGE--"]
         self.removeCommand = ["/usr/bin/pkexec", currentPath + "/Actions.py", "remove", "--PACKAGE--"]
         self.makeDefaultCommand = ["/usr/bin/pkexec", currentPath + "/Actions.py", "make-default", "--PATH--"]
         self.autoAlternativeCommand = ["/usr/bin/pkexec", currentPath + "/Actions.py", "update-alternatives-auto"]
-        self.updateAndRemoveCommand = ["/usr/bin/pkexec", currentPath + "/Actions.py", "update-and-remove", "--PACKAGE--"]
+        self.updateAndRemoveCommand = ["/usr/bin/pkexec", currentPath + "/Actions.py", "update-and-remove",
+                                       "--PACKAGE--"]
 
         # - Info commands:
         self.isInstalledCommand = ["dpkg", "-s", "--PACKAGE--"]
@@ -27,8 +30,7 @@ class PackageManager:
 
         # Get initialize infos:
         self.findDefault()
-            
-    
+
     def install(self, packageObject):
         installCommand = self.installCommand
         installCommand[3] = packageObject["package"]
@@ -43,12 +45,12 @@ class PackageManager:
         makeDefaultCommand[3] = packageObject["path"]
 
         self.startProcess(makeDefaultCommand)
-    
+
     def uninstall(self, packageObject):
         if self.isDefault(packageObject):
             updateAndRemoveCommand = self.updateAndRemoveCommand
             updateAndRemoveCommand[3] = updateAndRemoveCommand[3].replace("--PACKAGE--", packageObject["package"] + "*")
-            
+
             self.startProcess(updateAndRemoveCommand)
             self.stk_pages.set_visible_child_name("page_processing")
         else:
@@ -61,8 +63,6 @@ class PackageManager:
     def onProgress(self, percent):
         self.pb_percent.set_fraction(float(percent) / 100)
 
-
-
     # CHECK BOOLEANS:
     def isInstalled(self, packageObject):
         isInstalledCommand = self.isInstalledCommand
@@ -72,8 +72,6 @@ class PackageManager:
 
     def isDefault(self, packageObject):
         return packageObject["path"] == self.defaultJavaPath
-
-    
 
     # TOOLS:
     def findDefault(self):
@@ -85,17 +83,15 @@ class PackageManager:
                 self.defaultJavaPath = line[1]
                 return
 
-
-
     # PROCESS SPAWNING:
     def startProcess(self, params):
         pid, stdin, stdout, stderr = GLib.spawn_async(params,
-                                    flags=GLib.SPAWN_SEARCH_PATH | GLib.SPAWN_LEAVE_DESCRIPTORS_OPEN | GLib.SPAWN_DO_NOT_REAP_CHILD,
-                                    standard_input=False, standard_output=True, standard_error=True)
+                                                      flags=GLib.SPAWN_SEARCH_PATH | GLib.SPAWN_LEAVE_DESCRIPTORS_OPEN | GLib.SPAWN_DO_NOT_REAP_CHILD,
+                                                      standard_input=False, standard_output=True, standard_error=True)
         GLib.io_add_watch(GLib.IOChannel(stdout), GLib.IO_IN | GLib.IO_HUP, self.onProcessStdout)
         GLib.io_add_watch(GLib.IOChannel(stderr), GLib.IO_IN | GLib.IO_HUP, self.onProcessStderr)
         GLib.child_watch_add(GLib.PRIORITY_DEFAULT, pid, self.onProcessExit)
-    
+
     def startProcessSync(self, params):
         return GLib.spawn_sync(None, params, None, GLib.SPAWN_SEARCH_PATH)
 
@@ -110,7 +106,7 @@ class PackageManager:
         if 'dpkg-exec' in line.split(':'):
             self.onProgress(100)
         return True
-    
+
     def onProcessStderr(self, source, condition):
         if condition == GLib.IO_HUP:
             return False
