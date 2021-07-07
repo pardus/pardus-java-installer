@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from setuptools import setup, find_packages,os
+from setuptools import setup, find_packages, os
 from shutil import copyfile
 
 changelog = 'debian/changelog'
@@ -20,7 +20,8 @@ data_files = [
     ("/usr/share/applications/", ["tr.org.pardus.java-installer.desktop"]),
     ("/usr/share/locale/tr/LC_MESSAGES/", ["translations/tr/LC_MESSAGES/pardus-java-installer.mo"]),
     ("/usr/share/pardus/pardus-java-installer/", ["icon.svg"]),
-    ("/usr/share/pardus/pardus-java-installer/src", ["src/main.py", "src/MainWindow.py", "src/PackageManager.py", "src/Actions.py", "src/__version__"]),
+    ("/usr/share/pardus/pardus-java-installer/src",
+     ["src/main.py", "src/MainWindow.py", "src/PackageManager.py", "src/Actions.py", "src/__version__"]),
     ("/usr/share/pardus/pardus-java-installer/ui", ["ui/MainWindow.glade"]),
     ("/usr/share/polkit-1/actions", ["tr.org.pardus.pkexec.pardus-java-installer.policy"]),
     ("/usr/bin/", ["pardus-java-installer"]),
