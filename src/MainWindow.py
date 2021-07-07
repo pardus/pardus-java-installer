@@ -8,7 +8,7 @@ packages = {
     "openjdk_17" :  { "package": "openjdk-17-jre",  "path": "/usr/lib/jvm/java-17-openjdk-amd64/bin/java" },
     "openjdk_11" :  { "package": "openjdk-11-jre",  "path": "/usr/lib/jvm/java-11-openjdk-amd64/bin/java" },
     "openjdk_8" :   { "package": "openjdk-8-jre",   "path": "/usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java" },
-    "oracle_8" :    { "package": "oracle-java8-jdk","path": "/usr/lib/jvm/oracle-java8-jre/bin/java" },
+    "oracle_8" :    { "package": "oracle-java8-jdk","path": "/usr/lib/jvm/oracle-java8-jdk-amd64/jre/bin/java" },
 }
 
 import locale, os
