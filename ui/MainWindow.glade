@@ -5,7 +5,7 @@
   <object class="GtkAboutDialog" id="dialog_about">
     <property name="can-focus">False</property>
     <property name="type-hint">dialog</property>
-    <property name="program-name">Pardus Java Installer</property>
+    <property name="program-name" translatable="yes">Pardus Java Installer</property>
     <property name="version">v0.2</property>
     <property name="copyright">TÜBİTAK ULAKBİM | ©2021</property>
     <property name="comments" translatable="yes">Install &amp; Manage Java versions easily.</property>
@@ -44,6 +44,7 @@
   <object class="GtkWindow" id="window">
     <property name="can-focus">False</property>
     <property name="title" translatable="yes">Pardus Java Installer</property>
+    <property name="resizable">False</property>
     <property name="default-width">480</property>
     <property name="default-height">220</property>
     <property name="icon">../icon.svg</property>
@@ -488,10 +489,8 @@
               <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="margin-start">7</property>
-                <property name="margin-end">7</property>
-                <property name="margin-top">7</property>
-                <property name="margin-bottom">7</property>
+                <property name="valign">center</property>
+                <property name="margin-bottom">20</property>
                 <property name="orientation">vertical</property>
                 <child>
                   <object class="GtkSpinner">
@@ -523,41 +522,15 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkLabel" id="lbl_packageName">
+                  <object class="GtkLabel" id="lbl_percent">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="opacity">0.80</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">2</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkSeparator">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="margin-top">7</property>
-                    <property name="margin-bottom">7</property>
+                    <property name="label">%10</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
                     <property name="position">3</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkProgressBar" id="pb_percent">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="margin-top">7</property>
-                    <property name="show-text">True</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">4</property>
                   </packing>
                 </child>
               </object>
@@ -570,10 +543,8 @@
               <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="margin-start">7</property>
-                <property name="margin-end">7</property>
-                <property name="margin-top">7</property>
-                <property name="margin-bottom">7</property>
+                <property name="valign">center</property>
+                <property name="margin-bottom">20</property>
                 <property name="orientation">vertical</property>
                 <child>
                   <object class="GtkSpinner">
@@ -614,8 +585,8 @@
               <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="margin-top">7</property>
-                <property name="margin-bottom">7</property>
+                <property name="valign">center</property>
+                <property name="margin-bottom">20</property>
                 <property name="orientation">vertical</property>
                 <child>
                   <object class="GtkImage">

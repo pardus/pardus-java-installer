@@ -4,10 +4,10 @@ from gi.repository import GLib, Gio, Gtk
 import os, sys
 
 class PackageManager:
-    def __init__(self, onProcessFinished, pb_percent, stk_pages):
+    def __init__(self, on_process_finished, on_progress, stk_pages):
         # Get packages array
-        self.onProcessFinished = onProcessFinished
-        self.pb_percent = pb_percent
+        self.on_process_finished = on_process_finished
+        self.on_progress = on_progress
         self.stk_pages = stk_pages
         self.defaultJavaPath = ""
 
@@ -35,7 +35,7 @@ class PackageManager:
 
         self.startProcess(installCommand)
 
-        self.pb_percent.set_fraction(0)
+        self.on_progress("0")
         self.stk_pages.set_visible_child_name("page_downloading")
 
     def set_as_default(self, packageObject):
@@ -57,10 +57,6 @@ class PackageManager:
 
             self.startProcess(removeCommand)
             self.stk_pages.set_visible_child_name("page_processing")
-
-    def onProgress(self, percent):
-        self.pb_percent.set_fraction(float(percent) / 100)
-
 
 
     # CHECK BOOLEANS:
@@ -104,19 +100,19 @@ class PackageManager:
             return False
 
         line = source.readline()
-        print(line.rstrip())
+
         if 'dlstatus' in line.split(':'):
-            self.onProgress(line.split(':')[2])
+            self.on_progress(line.split(':')[2].split('.')[0])
         if 'dpkg-exec' in line.split(':'):
-            self.onProgress(100)
+            self.on_progress("100")
+        
         return True
     
     def onProcessStderr(self, source, condition):
         if condition == GLib.IO_HUP:
             return False
         line = source.readline()
-        print(line.rstrip())
         return True
 
     def onProcessExit(self, pid, status):
-        self.onProcessFinished(status)
+        self.on_process_finished(status)

@@ -44,7 +44,7 @@ class MainWindow:
         self.defineComponents()
 
         # Prepare PackageManager
-        self.packageManager = PackageManager(self.onProcessFinished, self.pb_percent, self.stk_pages)
+        self.packageManager = PackageManager(self.on_process_finished, self.on_install_progress, self.stk_pages)
 
         # Set version
         # If haven't got from __version__ file then accept version in MainWindow.glade file
@@ -62,11 +62,9 @@ class MainWindow:
         # Display:
         self.fb_applications = self.builder.get_object("fb_applications")
         self.stk_pages = self.builder.get_object("stk_pages")
-
         self.dialog_about = self.builder.get_object("dialog_about")
 
-        self.pb_percent = self.builder.get_object("pb_percent")
-        self.lbl_packageName = self.builder.get_object("lbl_packageName")
+        self.lbl_percent = self.builder.get_object("lbl_percent")
 
         # Buttons:
         self.btn_uninstall_openjdk_17 = self.builder.get_object("btn_uninstall_openjdk_17")
@@ -128,6 +126,8 @@ class MainWindow:
         else:
             self.stk_oracle_8.set_visible_child_name("default")
     
+
+
     # Installations Signals:
     def on_btn_install_clicked(self, button):
         package = button.get_name() # like openjdk_11, openjdk_17, oracle_8
@@ -153,15 +153,17 @@ class MainWindow:
     def btn_apt_ok_clicked(self, button):
         self.stk_pages.set_visible_child_name("page_main")
     
-    def onProcessFinished(self, status):
+    def on_process_finished(self, status):
         if status == 25600:
             self.stk_pages.set_visible_child_name("page_apt_busy")
         else:
             self.stk_pages.set_visible_child_name("page_main")
-        print(status)
         
         self.refreshGUI()
         
         self.window.set_sensitive(True)
         self.window.show_all()
+    
+    def on_install_progress(self, percent):
+        self.lbl_percent.set_text(f"%{percent}")
     

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-27 12:33+0300\n"
+"POT-Creation-Date: 2021-07-07 20:21+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,41 +17,47 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: MainWindow.py:97 MainWindow.py:165
-msgid "Install"
-msgstr ""
-
-#: MainWindow.py:102 MainWindow.py:170
-msgid "Make Default"
-msgstr ""
-
-#: MainWindow.py:107 MainWindow.py:175
-msgid "Default"
-msgstr ""
-
-#: MainWindow.py:115
-msgid "Uninstall"
-msgstr ""
-
-#: MainWindow.glade:11
+#: ../ui/MainWindow.glade:11
 msgid "Install & Manage Java versions easily."
 msgstr ""
 
-#: MainWindow.glade:44 MainWindow.glade:104
-msgid "Downloading"
-msgstr ""
-
-#: MainWindow.glade:170 MainWindow.glade:228
-msgid "Processing"
-msgstr ""
-
-#: MainWindow.glade:257 MainWindow.glade:265
+#: ../ui/MainWindow.glade:46 ../ui/MainWindow.glade:736
 msgid "Pardus Java Installer"
 msgstr ""
 
+#: ../ui/MainWindow.glade:119 ../ui/MainWindow.glade:216
+#: ../ui/MainWindow.glade:313 ../ui/MainWindow.glade:410
+msgid "Install"
+msgstr ""
+
+#: ../ui/MainWindow.glade:132 ../ui/MainWindow.glade:229
+#: ../ui/MainWindow.glade:326 ../ui/MainWindow.glade:423
+msgid "Set as Default"
+msgstr ""
+
+#: ../ui/MainWindow.glade:149 ../ui/MainWindow.glade:246
+#: ../ui/MainWindow.glade:343 ../ui/MainWindow.glade:440
+msgid "Default"
+msgstr ""
+
+#: ../ui/MainWindow.glade:169 ../ui/MainWindow.glade:266
+#: ../ui/MainWindow.glade:363 ../ui/MainWindow.glade:460
+msgid "Uninstall"
+msgstr ""
+
+#: ../ui/MainWindow.glade:514
+msgid "Downloading"
+msgstr ""
+
+#: ../ui/MainWindow.glade:596
+msgid "Processing"
+msgstr ""
+
+#: ../ui/MainWindow.glade:638
 msgid "Apt is busy."
 msgstr ""
 
+#: ../ui/MainWindow.glade:655
 msgid ""
 "Apt is using by an another program.\n"
 "Please close it and try again."
