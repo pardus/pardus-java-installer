@@ -6,11 +6,10 @@ import os, sys
 
 
 class PackageManager:
-    def __init__(self, on_process_finished, on_progress, stk_pages):
+    def __init__(self, on_process_finished, on_progress):
         # Get packages array
         self.on_process_finished = on_process_finished
         self.on_progress = on_progress
-        self.stk_pages = stk_pages
         self.defaultJavaPath = ""
 
         # Commands
@@ -37,8 +36,7 @@ class PackageManager:
 
         self.startProcess(installCommand)
 
-        self.on_progress("0")
-        self.stk_pages.set_visible_child_name("page_downloading")
+        self.on_progress("0", "Downloading")
 
     def set_as_default(self, packageObject):
         makeDefaultCommand = self.makeDefaultCommand
@@ -52,13 +50,11 @@ class PackageManager:
             updateAndRemoveCommand[3] = updateAndRemoveCommand[3].replace("--PACKAGE--", packageObject["package"] + "*")
 
             self.startProcess(updateAndRemoveCommand)
-            self.stk_pages.set_visible_child_name("page_processing")
         else:
             removeCommand = self.removeCommand
             removeCommand[3] = packageObject["package"] + "*"
 
             self.startProcess(removeCommand)
-            self.stk_pages.set_visible_child_name("page_processing")
 
 
     # CHECK BOOLEANS:
@@ -98,10 +94,11 @@ class PackageManager:
             return False
 
         line = source.readline()
-        if 'dlstatus' in line.split(':'):
-            self.on_progress(line.split(':')[2].split('.')[0])
-        if 'dpkg-exec' in line.split(':'):
-            self.on_progress("100")
+        params = line.split(":")
+        if 'dlstatus' in params:
+            self.on_progress(params[2].split('.')[0], "Downloading")
+        elif 'pmstatus' in params:
+            self.on_progress("100", params[3].rstrip())
         
         return True
 

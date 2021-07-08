@@ -45,7 +45,7 @@ class MainWindow:
         self.defineComponents()
 
         # Prepare PackageManager
-        self.packageManager = PackageManager(self.on_process_finished, self.on_install_progress, self.stk_pages)
+        self.packageManager = PackageManager(self.on_process_finished, self.on_install_progress)
 
         # Set version
         # If haven't got from __version__ file then accept version in MainWindow.glade file
@@ -66,6 +66,7 @@ class MainWindow:
         self.dialog_about = self.builder.get_object("dialog_about")
 
         self.lbl_percent = self.builder.get_object("lbl_percent")
+        self.lbl_install_status = self.builder.get_object("lbl_install_status")
 
         # Buttons:
         self.btn_uninstall_openjdk_17 = self.builder.get_object("btn_uninstall_openjdk_17")
@@ -134,11 +135,13 @@ class MainWindow:
         package = button.get_name()  # like openjdk_11, openjdk_17, oracle_8
 
         self.packageManager.install(packages[package])
+        self.stk_pages.set_visible_child_name("page_downloading")
 
     def on_btn_uninstall_clicked(self, button):
         package = button.get_name()  # like openjdk_11, openjdk_17, oracle_8
 
         self.packageManager.uninstall(packages[package])
+        self.stk_pages.set_visible_child_name("page_processing")
 
     def on_btn_default_clicked(self, button):
         package = button.get_name()  # like openjdk_11, openjdk_17, oracle_8
@@ -163,6 +166,7 @@ class MainWindow:
         self.window.set_sensitive(True)
         self.window.show_all()
     
-    def on_install_progress(self, percent):
+    def on_install_progress(self, percent, status):
+        self.lbl_install_status.set_text(tr(status))
         self.lbl_percent.set_text(f"%{percent}")
     

@@ -506,10 +506,13 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkLabel">
+                  <object class="GtkLabel" id="lbl_install_status">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="label" translatable="yes">Downloading</property>
+                    <property name="justify">center</property>
+                    <property name="ellipsize">end</property>
+                    <property name="max-width-chars">20</property>
                     <attributes>
                       <attribute name="size" value="16000"/>
                     </attributes>
