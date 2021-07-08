@@ -529,6 +529,10 @@
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="label">%10</property>
+                    <property name="justify">center</property>
+                    <property name="ellipsize">end</property>
+                    <property name="width-chars">20</property>
+                    <property name="max-width-chars">20</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -566,7 +570,7 @@
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">Processing</property>
+                    <property name="label" translatable="yes">Uninstalling</property>
                     <attributes>
                       <attribute name="size" value="16000"/>
                     </attributes>
@@ -660,6 +664,40 @@ Please close it and try again.</property>
               <packing>
                 <property name="name">page_apt_busy</property>
                 <property name="position">3</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkBox">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="label" translatable="yes">Installing</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="label">burası "Installing"i translation'a eklemek için.</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="position">4</property>
               </packing>
             </child>
           </object>

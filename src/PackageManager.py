@@ -36,7 +36,7 @@ class PackageManager:
 
         self.startProcess(installCommand)
 
-        self.on_progress("0", "Downloading")
+        self.on_progress("%0", "Downloading")
 
     def set_as_default(self, packageObject):
         makeDefaultCommand = self.makeDefaultCommand
@@ -95,10 +95,11 @@ class PackageManager:
 
         line = source.readline()
         params = line.split(":")
+        print(line.rstrip())
         if 'dlstatus' in params:
-            self.on_progress(params[2].split('.')[0], "Downloading")
+            self.on_progress(f"%{params[2].split('.')[0]}", "Downloading")
         elif 'pmstatus' in params:
-            self.on_progress("100", params[3].rstrip())
+            self.on_progress(params[3].rstrip(), "Installing")
         
         return True
 

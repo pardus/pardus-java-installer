@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-07 20:21+0300\n"
+"POT-Creation-Date: 2021-07-08 13:36+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "Install & Manage Java versions easily."
 msgstr ""
 
-#: ../ui/MainWindow.glade:46 ../ui/MainWindow.glade:736
+#: ../ui/MainWindow.glade:46 ../ui/MainWindow.glade:743
 msgid "Pardus Java Installer"
 msgstr ""
 
@@ -45,20 +45,24 @@ msgstr ""
 msgid "Uninstall"
 msgstr ""
 
-#: ../ui/MainWindow.glade:514
+#: ../ui/MainWindow.glade:512
 msgid "Downloading"
 msgstr ""
 
-#: ../ui/MainWindow.glade:596
-msgid "Processing"
+#: ../ui/MainWindow.glade:569
+msgid "Uninstalling"
 msgstr ""
 
-#: ../ui/MainWindow.glade:638
+#: ../ui/MainWindow.glade:611
 msgid "Apt is busy."
 msgstr ""
 
-#: ../ui/MainWindow.glade:655
+#: ../ui/MainWindow.glade:628
 msgid ""
 "Apt is using by an another program.\n"
 "Please close it and try again."
+msgstr ""
+
+#: ../ui/MainWindow.glade:674
+msgid "Installing"
 msgstr ""

@@ -168,5 +168,5 @@ class MainWindow:
     
     def on_install_progress(self, percent, status):
         self.lbl_install_status.set_text(tr(status))
-        self.lbl_percent.set_text(f"%{percent}")
+        self.lbl_percent.set_text(percent)
     
