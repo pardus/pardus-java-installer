@@ -39,7 +39,7 @@
   <object class="GtkImage" id="img_info">
     <property name="visible">True</property>
     <property name="can-focus">False</property>
-    <property name="icon-name">dialog-information</property>
+    <property name="icon-name">dialog-information-symbolic</property>
   </object>
   <object class="GtkWindow" id="window">
     <property name="can-focus">False</property>
