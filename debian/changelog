@@ -1,3 +1,13 @@
+pardus-java-installer (0.2.0~Beta2) unstable; urgency=medium
+
+  [ Emin Fedar ]
+  * Added gir dependency
+
+  [ Fatih Altun ]
+  * Update about icon as dialog-information-symbolic
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Mon, 02 Aug 2021 17:06:11 +0300
+
 pardus-java-installer (0.2.0~Beta1) unstable; urgency=medium
 
   [ Emin Fedar ]
