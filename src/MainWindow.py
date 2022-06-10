@@ -73,6 +73,10 @@ class MainWindow:
         self.refreshGUI()
         self.window.show_all()
 
+        # openjdk8 arm64 package is not available
+        if arch == "arm64":
+            self.box_openjdk_8.set_visible(False)
+
     def defineComponents(self):
         # Display:
         self.fb_applications = self.builder.get_object("fb_applications")
@@ -93,6 +97,9 @@ class MainWindow:
         self.stk_openjdk_11 = self.builder.get_object("stk_openjdk_11")
         self.stk_openjdk_8 = self.builder.get_object("stk_openjdk_8")
         self.stk_oracle_8 = self.builder.get_object("stk_oracle_8")
+
+        # Boxes:
+        self.box_openjdk_8 = self.builder.get_object("box_openjdk_8")
 
     def refreshGUI(self):
         # Refresh default information
@@ -179,6 +186,10 @@ class MainWindow:
 
         self.window.set_sensitive(True)
         self.window.show_all()
+
+        # openjdk8 arm64 package is not available
+        if arch == "arm64":
+            self.box_openjdk_8.set_visible(False)
     
     def on_install_progress(self, percent, status):
         self.lbl_install_status.set_text(tr(status))
