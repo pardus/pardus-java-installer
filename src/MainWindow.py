@@ -8,10 +8,16 @@ from PackageManager import PackageManager
 import os
 
 arch = "amd64"
-mainarch = os.uname()[4]
+try:
+    mainarch = os.uname()[4]
+except Exception as e:
+    mainarch = ""
+    print("mainarch Exception : {}".format(e))
 
 if mainarch == "aarch64":
     arch = "arm64"
+
+print("mainarch : {} | arch : {}".format(mainarch, arch))
 
 packages = {
     "openjdk_17": {"package": "openjdk-17-jre", "path": "/usr/lib/jvm/java-17-openjdk-{}/bin/java".format(arch)},
