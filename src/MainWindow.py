@@ -5,11 +5,19 @@ from gi.repository import GLib, Gio, Gtk
 
 from PackageManager import PackageManager
 
+import os
+
+arch = "amd64"
+mainarch = os.uname()[4]
+
+if mainarch == "aarch64":
+    arch = "arm64"
+
 packages = {
-    "openjdk_17": {"package": "openjdk-17-jre", "path": "/usr/lib/jvm/java-17-openjdk-amd64/bin/java"},
-    "openjdk_11": {"package": "openjdk-11-jre", "path": "/usr/lib/jvm/java-11-openjdk-amd64/bin/java"},
-    "openjdk_8": {"package": "openjdk-8-jre", "path": "/usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java"},
-    "oracle_8": {"package": "oracle-java8-jdk", "path": "/usr/lib/jvm/oracle-java8-jdk-amd64/jre/bin/java"},
+    "openjdk_17": {"package": "openjdk-17-jre", "path": "/usr/lib/jvm/java-17-openjdk-{}/bin/java".format(arch)},
+    "openjdk_11": {"package": "openjdk-11-jre", "path": "/usr/lib/jvm/java-11-openjdk-{}/bin/java".format(arch)},
+    "openjdk_8": {"package": "openjdk-8-jre", "path": "/usr/lib/jvm/java-8-openjdk-{}/jre/bin/java".format(arch)},
+    "oracle_8": {"package": "oracle-java8-jdk", "path": "/usr/lib/jvm/oracle-java8-jdk-{}/jre/bin/java".format(arch)},
 }
 
 import locale, os
