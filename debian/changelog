@@ -1,3 +1,10 @@
+pardus-java-installer (0.2.0~Beta3) unstable; urgency=medium
+
+  * Update Architecture as all
+  * Use arch param on get path of java
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Fri, 10 Jun 2022 11:14:45 +0300
+
 pardus-java-installer (0.2.0~Beta2) unstable; urgency=medium
 
   [ Emin Fedar ]
