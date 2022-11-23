@@ -1,9 +1,12 @@
 [Desktop Entry]
 Name=Pardus Java Installer
+Name[pt]=Instalador Java do Pardus
 Name[tr]=Pardus Java Kurucu
 GenericName=Java Installer
+GenericName[pt]=Instalador Java
 GenericName[tr]=Java Kurucu
 Comment=Install & Manage different Java versions easily.
+Comment[pt]=Instalar e gerir facilmente diferentes versões Java.
 Comment[tr]=Farklı Java sürümlerini kolayca kurun ve yönetin.
 Exec=pardus-java-installer
 Icon=pardus-java-installer
