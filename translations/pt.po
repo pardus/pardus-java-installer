@@ -1,0 +1,71 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Hugo Carvalho <hugokarvalho@hotmail.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-07-08 13:36+0300\n"
+"PO-Revision-Date: 2022-11-23 12:51+0000\n"
+"Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
+"Language-Team: \n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.2\n"
+
+#: ../ui/MainWindow.glade:11
+msgid "Install & Manage Java versions easily."
+msgstr "Instalar e gerir facilmente versões Java."
+
+#: ../ui/MainWindow.glade:46 ../ui/MainWindow.glade:743
+msgid "Pardus Java Installer"
+msgstr "Instalador Java do Pardus"
+
+#: ../ui/MainWindow.glade:119 ../ui/MainWindow.glade:216
+#: ../ui/MainWindow.glade:313 ../ui/MainWindow.glade:410
+msgid "Install"
+msgstr "Instalar"
+
+#: ../ui/MainWindow.glade:132 ../ui/MainWindow.glade:229
+#: ../ui/MainWindow.glade:326 ../ui/MainWindow.glade:423
+msgid "Set as Default"
+msgstr "Definir como Predefinido"
+
+#: ../ui/MainWindow.glade:149 ../ui/MainWindow.glade:246
+#: ../ui/MainWindow.glade:343 ../ui/MainWindow.glade:440
+msgid "Default"
+msgstr "Predefinido"
+
+#: ../ui/MainWindow.glade:169 ../ui/MainWindow.glade:266
+#: ../ui/MainWindow.glade:363 ../ui/MainWindow.glade:460
+msgid "Uninstall"
+msgstr "Desinstalar"
+
+#: ../ui/MainWindow.glade:512
+msgid "Downloading"
+msgstr "A transferir"
+
+#: ../ui/MainWindow.glade:569
+msgid "Uninstalling"
+msgstr "A desinstalar"
+
+#: ../ui/MainWindow.glade:611
+msgid "Apt is busy."
+msgstr "O apt está ocupado."
+
+#: ../ui/MainWindow.glade:628
+msgid ""
+"Apt is using by an another program.\n"
+"Please close it and try again."
+msgstr ""
+"O apt está a ser utilizado por outro programa.\n"
+"Feche-o e tente novamente."
+
+#: ../ui/MainWindow.glade:674
+msgid "Installing"
+msgstr "A instalar"
