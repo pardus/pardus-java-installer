@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-08 13:36+0300\n"
+"POT-Creation-Date: 2022-12-06 13:49+0300\n"
 "PO-Revision-Date: 2022-11-23 12:51+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: \n"
@@ -18,47 +18,47 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.2\n"
 
-#: ../ui/MainWindow.glade:11
-msgid "Install & Manage Java versions easily."
-msgstr "Instalar e gerir facilmente versões Java."
-
-#: ../ui/MainWindow.glade:46 ../ui/MainWindow.glade:743
+#: ui/MainWindow.glade:8 ui/MainWindow.glade:46 ui/MainWindow.glade:762
 msgid "Pardus Java Installer"
 msgstr "Instalador Java do Pardus"
 
-#: ../ui/MainWindow.glade:119 ../ui/MainWindow.glade:216
-#: ../ui/MainWindow.glade:313 ../ui/MainWindow.glade:410
+#: ui/MainWindow.glade:11
+msgid "Install & Manage Java versions easily."
+msgstr "Instalar e gerir facilmente versões Java."
+
+#: ui/MainWindow.glade:127 ui/MainWindow.glade:224 ui/MainWindow.glade:321
+#: ui/MainWindow.glade:418
 msgid "Install"
 msgstr "Instalar"
 
-#: ../ui/MainWindow.glade:132 ../ui/MainWindow.glade:229
-#: ../ui/MainWindow.glade:326 ../ui/MainWindow.glade:423
+#: ui/MainWindow.glade:140 ui/MainWindow.glade:237 ui/MainWindow.glade:334
+#: ui/MainWindow.glade:431
 msgid "Set as Default"
 msgstr "Definir como Predefinido"
 
-#: ../ui/MainWindow.glade:149 ../ui/MainWindow.glade:246
-#: ../ui/MainWindow.glade:343 ../ui/MainWindow.glade:440
+#: ui/MainWindow.glade:157 ui/MainWindow.glade:254 ui/MainWindow.glade:351
+#: ui/MainWindow.glade:448
 msgid "Default"
 msgstr "Predefinido"
 
-#: ../ui/MainWindow.glade:169 ../ui/MainWindow.glade:266
-#: ../ui/MainWindow.glade:363 ../ui/MainWindow.glade:460
+#: ui/MainWindow.glade:177 ui/MainWindow.glade:274 ui/MainWindow.glade:371
+#: ui/MainWindow.glade:468
 msgid "Uninstall"
 msgstr "Desinstalar"
 
-#: ../ui/MainWindow.glade:512
+#: ui/MainWindow.glade:527
 msgid "Downloading"
 msgstr "A transferir"
 
-#: ../ui/MainWindow.glade:569
+#: ui/MainWindow.glade:588
 msgid "Uninstalling"
 msgstr "A desinstalar"
 
-#: ../ui/MainWindow.glade:611
+#: ui/MainWindow.glade:630
 msgid "Apt is busy."
 msgstr "O apt está ocupado."
 
-#: ../ui/MainWindow.glade:628
+#: ui/MainWindow.glade:647
 msgid ""
 "Apt is using by an another program.\n"
 "Please close it and try again."
@@ -66,6 +66,6 @@ msgstr ""
 "O apt está a ser utilizado por outro programa.\n"
 "Feche-o e tente novamente."
 
-#: ../ui/MainWindow.glade:674
+#: ui/MainWindow.glade:693
 msgid "Installing"
 msgstr "A instalar"

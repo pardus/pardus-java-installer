@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-08 13:36+0300\n"
+"POT-Creation-Date: 2022-12-06 13:49+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,52 +17,52 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../ui/MainWindow.glade:11
-msgid "Install & Manage Java versions easily."
-msgstr ""
-
-#: ../ui/MainWindow.glade:46 ../ui/MainWindow.glade:743
+#: ui/MainWindow.glade:8 ui/MainWindow.glade:46 ui/MainWindow.glade:762
 msgid "Pardus Java Installer"
 msgstr ""
 
-#: ../ui/MainWindow.glade:119 ../ui/MainWindow.glade:216
-#: ../ui/MainWindow.glade:313 ../ui/MainWindow.glade:410
+#: ui/MainWindow.glade:11
+msgid "Install & Manage Java versions easily."
+msgstr ""
+
+#: ui/MainWindow.glade:127 ui/MainWindow.glade:224 ui/MainWindow.glade:321
+#: ui/MainWindow.glade:418
 msgid "Install"
 msgstr ""
 
-#: ../ui/MainWindow.glade:132 ../ui/MainWindow.glade:229
-#: ../ui/MainWindow.glade:326 ../ui/MainWindow.glade:423
+#: ui/MainWindow.glade:140 ui/MainWindow.glade:237 ui/MainWindow.glade:334
+#: ui/MainWindow.glade:431
 msgid "Set as Default"
 msgstr ""
 
-#: ../ui/MainWindow.glade:149 ../ui/MainWindow.glade:246
-#: ../ui/MainWindow.glade:343 ../ui/MainWindow.glade:440
+#: ui/MainWindow.glade:157 ui/MainWindow.glade:254 ui/MainWindow.glade:351
+#: ui/MainWindow.glade:448
 msgid "Default"
 msgstr ""
 
-#: ../ui/MainWindow.glade:169 ../ui/MainWindow.glade:266
-#: ../ui/MainWindow.glade:363 ../ui/MainWindow.glade:460
+#: ui/MainWindow.glade:177 ui/MainWindow.glade:274 ui/MainWindow.glade:371
+#: ui/MainWindow.glade:468
 msgid "Uninstall"
 msgstr ""
 
-#: ../ui/MainWindow.glade:512
+#: ui/MainWindow.glade:527
 msgid "Downloading"
 msgstr ""
 
-#: ../ui/MainWindow.glade:569
+#: ui/MainWindow.glade:588
 msgid "Uninstalling"
 msgstr ""
 
-#: ../ui/MainWindow.glade:611
+#: ui/MainWindow.glade:630
 msgid "Apt is busy."
 msgstr ""
 
-#: ../ui/MainWindow.glade:628
+#: ui/MainWindow.glade:647
 msgid ""
 "Apt is using by an another program.\n"
 "Please close it and try again."
 msgstr ""
 
-#: ../ui/MainWindow.glade:674
+#: ui/MainWindow.glade:693
 msgid "Installing"
 msgstr ""
