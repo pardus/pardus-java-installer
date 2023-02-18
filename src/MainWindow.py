@@ -8,11 +8,8 @@ from PackageManager import PackageManager
 import os
 
 arch = "amd64"
-try:
-    mainarch = os.uname()[4]
-except Exception as e:
-    mainarch = ""
-    print("mainarch Exception : {}".format(e))
+mainarch = os.uname().get(4)
+mainarch = mainarch if mainarch is not None else “”
 
 if mainarch == "aarch64":
     arch = "arm64"
