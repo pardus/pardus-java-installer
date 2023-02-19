@@ -3,6 +3,7 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import GLib, Gio, Gtk
 import os, sys
+from Actions import Action
 
 
 class PackageManager:
@@ -16,12 +17,7 @@ class PackageManager:
         currentPath = os.path.dirname(os.path.abspath(__file__))
 
         # - Installation commands
-        self.installCommand = ["/usr/bin/pkexec", currentPath + "/Actions.py", "install", "--PACKAGE--"]
-        self.removeCommand = ["/usr/bin/pkexec", currentPath + "/Actions.py", "remove", "--PACKAGE--"]
-        self.makeDefaultCommand = ["/usr/bin/pkexec", currentPath + "/Actions.py", "make-default", "--PATH--"]
         self.autoAlternativeCommand = ["/usr/bin/pkexec", currentPath + "/Actions.py", "update-alternatives-auto"]
-        self.updateAndRemoveCommand = ["/usr/bin/pkexec", currentPath + "/Actions.py", "update-and-remove",
-                                       "--PACKAGE--"]
 
         # - Info commands:
         self.isInstalledCommand = ["dpkg", "-s", "--PACKAGE--"]
@@ -31,31 +27,21 @@ class PackageManager:
         self.findDefault()
 
     def install(self, packageObject):
-        installCommand = self.installCommand
-        installCommand[3] = packageObject["package"]
-
-        self.startProcess(installCommand)
+        act = Action(packageObject["package"])
+        act.startCommand("install")
 
         self.on_progress("%0", "Downloading")
 
     def set_as_default(self, packageObject):
-        makeDefaultCommand = self.makeDefaultCommand
-        makeDefaultCommand[3] = packageObject["path"]
-
-        self.startProcess(makeDefaultCommand)
+        act = Action(packageObject["path"])
+        act.startCommand("make-default")
 
     def uninstall(self, packageObject):
+        act = Action(packageObject["package"] + "*")
         if self.isDefault(packageObject):
-            updateAndRemoveCommand = self.updateAndRemoveCommand
-            updateAndRemoveCommand[3] = updateAndRemoveCommand[3].replace("--PACKAGE--", packageObject["package"] + "*")
-
-            self.startProcess(updateAndRemoveCommand)
+            act.startCommand("update-and-remove")
         else:
-            removeCommand = self.removeCommand
-            removeCommand[3] = packageObject["package"] + "*"
-
-            self.startProcess(removeCommand)
-
+            act.startCommand("remove")
 
     # CHECK BOOLEANS:
     def isInstalled(self, packageObject):
