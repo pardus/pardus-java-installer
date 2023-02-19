@@ -8,8 +8,7 @@ from PackageManager import PackageManager
 import os
 
 arch = "amd64"
-mainarch = os.uname().get(4)
-mainarch = mainarch if mainarch is not None else “”
+mainarch = os.uname().machine
 
 if mainarch == "aarch64":
     arch = "arm64"
