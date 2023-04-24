@@ -4,7 +4,7 @@ import sys
 import gi
 
 gi.require_version('Gtk', '3.0')
-from gi.repository import GLib, Gio, Gtk
+from gi.repository import Gtk
 
 from MainWindow import MainWindow
 
@@ -21,6 +21,5 @@ class Application(Gtk.Application):
         self.quit()
 
 
-if __name__ == "__main__":
-    app = Application()
-    app.run(sys.argv)
+app = Application()
+app.run(sys.argv)

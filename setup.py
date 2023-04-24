@@ -20,7 +20,7 @@ def create_mo_files():
 
 
 changelog = 'debian/changelog'
-version = ""
+version = "0.1.0"
 if os.path.exists(changelog):
     head = open(changelog).readline()
     try:
@@ -34,7 +34,7 @@ if os.path.exists(changelog):
 data_files = [
     ("/usr/share/applications/", ["tr.org.pardus.java-installer.desktop"]),
     ("/usr/share/pardus/pardus-java-installer/src",
-     ["src/main.py", "src/MainWindow.py", "src/PackageManager.py", "src/Actions.py", "src/__version__"]),
+     ["src/Main.py", "src/MainWindow.py", "src/PackageManager.py", "src/Actions.py", "src/__version__"]),
     ("/usr/share/pardus/pardus-java-installer/ui", ["ui/MainWindow.glade"]),
     ("/usr/share/polkit-1/actions", ["tr.org.pardus.pkexec.pardus-java-installer.policy"]),
     ("/usr/bin/", ["pardus-java-installer"]),
@@ -53,5 +53,5 @@ setup(
     description="Pardus Java Installer application.",
     license="GPLv3",
     keywords="java install installer",
-    url="https://www.pardus.org.tr",
+    url="https://github.com/pardus/pardus-java-installer",
 )
