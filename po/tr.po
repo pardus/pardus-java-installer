@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-06 13:49+0300\n"
+"POT-Creation-Date: 2023-04-24 16:34+0300\n"
 "PO-Revision-Date: 2020-10-27 12:37+0300\n"
 "Last-Translator: Emin Fedar <emin.fedar@pardus.org.tr>\n"
 "Language-Team: Turkish <gelistirici@pardus.org.tr>\n"
@@ -19,47 +19,47 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0\n"
 "X-Generator: Gtranslator 3.38.0\n"
 
-#: ui/MainWindow.glade:8 ui/MainWindow.glade:46 ui/MainWindow.glade:762
-msgid "Pardus Java Installer"
-msgstr "Pardus Java Kurucu"
-
 #: ui/MainWindow.glade:11
 msgid "Install & Manage Java versions easily."
 msgstr "Java sürümlerini kolayca yükleyin & yönetin."
 
-#: ui/MainWindow.glade:127 ui/MainWindow.glade:224 ui/MainWindow.glade:321
-#: ui/MainWindow.glade:418
+#: ui/MainWindow.glade:48 ui/MainWindow.glade:765
+msgid "Pardus Java Installer"
+msgstr "Pardus Java Kurucu"
+
+#: ui/MainWindow.glade:130 ui/MainWindow.glade:227 ui/MainWindow.glade:324
+#: ui/MainWindow.glade:421
 msgid "Install"
 msgstr "Yükle"
 
-#: ui/MainWindow.glade:140 ui/MainWindow.glade:237 ui/MainWindow.glade:334
-#: ui/MainWindow.glade:431
+#: ui/MainWindow.glade:143 ui/MainWindow.glade:240 ui/MainWindow.glade:337
+#: ui/MainWindow.glade:434
 msgid "Set as Default"
 msgstr "Varsayılan Yap"
 
-#: ui/MainWindow.glade:157 ui/MainWindow.glade:254 ui/MainWindow.glade:351
-#: ui/MainWindow.glade:448
+#: ui/MainWindow.glade:160 ui/MainWindow.glade:257 ui/MainWindow.glade:354
+#: ui/MainWindow.glade:451
 msgid "Default"
 msgstr "Varsayılan"
 
-#: ui/MainWindow.glade:177 ui/MainWindow.glade:274 ui/MainWindow.glade:371
-#: ui/MainWindow.glade:468
+#: ui/MainWindow.glade:180 ui/MainWindow.glade:277 ui/MainWindow.glade:374
+#: ui/MainWindow.glade:471
 msgid "Uninstall"
 msgstr "Kaldır"
 
-#: ui/MainWindow.glade:527
+#: ui/MainWindow.glade:530
 msgid "Downloading"
 msgstr "İndiriliyor"
 
-#: ui/MainWindow.glade:588
+#: ui/MainWindow.glade:591
 msgid "Uninstalling"
 msgstr "Kaldırılıyor"
 
-#: ui/MainWindow.glade:630
+#: ui/MainWindow.glade:633
 msgid "Apt is busy."
 msgstr "Apt meşgul."
 
-#: ui/MainWindow.glade:647
+#: ui/MainWindow.glade:650
 msgid ""
 "Apt is using by an another program.\n"
 "Please close it and try again."
@@ -67,7 +67,7 @@ msgstr ""
 "Apt'yi başka bir program kullanıyor.\n"
 "Lütfen kapatın ve tekrar deneyin."
 
-#: ui/MainWindow.glade:693
+#: ui/MainWindow.glade:696
 msgid "Installing"
 msgstr "Kuruluyor"
 
