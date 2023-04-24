@@ -27,17 +27,17 @@ packages = {
 }
 
 import locale, os
-from locale import gettext as tr
+from locale import gettext as _
 
 # Translation Constants:
 APPNAME = "pardus-java-installer"
 TRANSLATIONS_PATH = "/usr/share/locale"
-SYSTEM_LANGUAGE = os.environ.get("LANG")
+# SYSTEM_LANGUAGE = os.environ.get("LANG")
 
 # Translation functions:
 locale.bindtextdomain(APPNAME, TRANSLATIONS_PATH)
 locale.textdomain(APPNAME)
-locale.setlocale(locale.LC_ALL, SYSTEM_LANGUAGE)
+# locale.setlocale(locale.LC_ALL, SYSTEM_LANGUAGE)
 
 
 class MainWindow:
@@ -192,6 +192,6 @@ class MainWindow:
             self.box_openjdk_8.set_visible(False)
     
     def on_install_progress(self, percent, status):
-        self.lbl_install_status.set_text(tr(status))
+        self.lbl_install_status.set_text(_(status))
         self.lbl_percent.set_text(percent)
     
