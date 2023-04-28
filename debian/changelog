@@ -1,3 +1,22 @@
+pardus-java-installer (0.2.2) unstable; urgency=medium
+
+  [ Hugo Carvalho ]
+  * Add Portuguese translation
+  * Add Portuguese translation
+
+  [ Fatih Altun ]
+  * Update translation structure
+  * Update bin script and main
+  * Fix typo
+  * Update copyright to 2023
+  * Add screenshots
+  * Update README.md
+  * Update gettext
+  * Update translations
+  * Fix typo
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Fri, 28 Apr 2023 12:20:54 +0300
+
 pardus-java-installer (0.2.1) unstable; urgency=medium
 
   * Hide openjdk8 box on arm64
