@@ -12,6 +12,6 @@ Exec=pardus-java-installer
 Icon=pardus-java-installer
 Terminal=false
 Type=Application
-Categories=Settings;
+Categories=Settings;X-XFCE-SettingsDialog;
 StartupNotify=true
 Keywords=java;installer;pardus;
