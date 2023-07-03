@@ -10,6 +10,7 @@
     <property name="copyright">TÜBİTAK ULAKBİM | ©2023</property>
     <property name="comments" translatable="yes">Install &amp; Manage Java versions easily.</property>
     <property name="website">https://www.pardus.org.tr</property>
+    <property name="website-label" translatable="yes">Website</property>
     <property name="authors">Emin Fedar</property>
     <property name="translator-credits">Emin Fedar</property>
     <property name="artists">Çağrı Gökçe
