@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-24 16:34+0300\n"
+"POT-Creation-Date: 2023-07-03 04:05+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,48 +21,52 @@ msgstr ""
 msgid "Install & Manage Java versions easily."
 msgstr ""
 
-#: ui/MainWindow.glade:48 ui/MainWindow.glade:765
+#: ui/MainWindow.glade:13
+msgid "Website"
+msgstr ""
+
+#: ui/MainWindow.glade:49 ui/MainWindow.glade:766
 msgid "Pardus Java Installer"
 msgstr ""
 
-#: ui/MainWindow.glade:130 ui/MainWindow.glade:227 ui/MainWindow.glade:324
-#: ui/MainWindow.glade:421
+#: ui/MainWindow.glade:131 ui/MainWindow.glade:228 ui/MainWindow.glade:325
+#: ui/MainWindow.glade:422
 msgid "Install"
 msgstr ""
 
-#: ui/MainWindow.glade:143 ui/MainWindow.glade:240 ui/MainWindow.glade:337
-#: ui/MainWindow.glade:434
+#: ui/MainWindow.glade:144 ui/MainWindow.glade:241 ui/MainWindow.glade:338
+#: ui/MainWindow.glade:435
 msgid "Set as Default"
 msgstr ""
 
-#: ui/MainWindow.glade:160 ui/MainWindow.glade:257 ui/MainWindow.glade:354
-#: ui/MainWindow.glade:451
+#: ui/MainWindow.glade:161 ui/MainWindow.glade:258 ui/MainWindow.glade:355
+#: ui/MainWindow.glade:452
 msgid "Default"
 msgstr ""
 
-#: ui/MainWindow.glade:180 ui/MainWindow.glade:277 ui/MainWindow.glade:374
-#: ui/MainWindow.glade:471
+#: ui/MainWindow.glade:181 ui/MainWindow.glade:278 ui/MainWindow.glade:375
+#: ui/MainWindow.glade:472
 msgid "Uninstall"
 msgstr ""
 
-#: ui/MainWindow.glade:530
+#: ui/MainWindow.glade:531
 msgid "Downloading"
 msgstr ""
 
-#: ui/MainWindow.glade:591
+#: ui/MainWindow.glade:592
 msgid "Uninstalling"
 msgstr ""
 
-#: ui/MainWindow.glade:633
+#: ui/MainWindow.glade:634
 msgid "Apt is busy."
 msgstr ""
 
-#: ui/MainWindow.glade:650
+#: ui/MainWindow.glade:651
 msgid ""
 "Apt is using by an another program.\n"
 "Please close it and try again."
 msgstr ""
 
-#: ui/MainWindow.glade:696
+#: ui/MainWindow.glade:697
 msgid "Installing"
 msgstr ""
