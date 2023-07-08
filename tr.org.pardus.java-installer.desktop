@@ -14,4 +14,4 @@ Terminal=false
 Type=Application
 Categories=Settings;X-XFCE-SettingsDialog;
 StartupNotify=true
-Keywords=java;installer;pardus;
+Keywords=java;jdk;openjdk;oracle;installer;pardus;
