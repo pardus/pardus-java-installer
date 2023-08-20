@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import os
+import subprocess
+
 from setuptools import setup, find_packages
-import os, subprocess
 
 
 def create_mo_files():
@@ -32,14 +34,23 @@ if os.path.exists(changelog):
     f.close()
 
 data_files = [
-    ("/usr/share/applications/", ["tr.org.pardus.java-installer.desktop"]),
-    ("/usr/share/pardus/pardus-java-installer/src",
-     ["src/Main.py", "src/MainWindow.py", "src/PackageManager.py", "src/Actions.py", "src/__version__"]),
-    ("/usr/share/pardus/pardus-java-installer/ui", ["ui/MainWindow.glade"]),
-    ("/usr/share/polkit-1/actions", ["tr.org.pardus.pkexec.pardus-java-installer.policy"]),
-    ("/usr/bin/", ["pardus-java-installer"]),
-    ("/usr/share/icons/hicolor/scalable/apps/", ["pardus-java-installer.svg"])
-] + create_mo_files()
+                 ("/usr/share/applications/",
+                  ["tr.org.pardus.java-installer.desktop"]),
+                 ("/usr/share/pardus/pardus-java-installer/src",
+                  ["src/Main.py",
+                   "src/MainWindow.py",
+                   "src/PackageManager.py",
+                   "src/Actions.py",
+                   "src/__version__"]),
+                 ("/usr/share/pardus/pardus-java-installer/ui",
+                  ["ui/MainWindow.glade"]),
+                 ("/usr/share/polkit-1/actions",
+                  ["tr.org.pardus.pkexec.pardus-java-installer.policy"]),
+                 ("/usr/bin/",
+                  ["pardus-java-installer"]),
+                 ("/usr/share/icons/hicolor/scalable/apps/",
+                  ["pardus-java-installer.svg"])
+             ] + create_mo_files()
 
 setup(
     name="Pardus Java Installer",
