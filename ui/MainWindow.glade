@@ -4,14 +4,15 @@
   <requires lib="gtk+" version="3.20"/>
   <object class="GtkAboutDialog" id="dialog_about">
     <property name="can-focus">False</property>
+    <property name="icon-name">pardus-java-installer</property>
     <property name="type-hint">dialog</property>
     <property name="program-name">Pardus Java Installer</property>
     <property name="version">v0.2</property>
-    <property name="copyright">TÜBİTAK ULAKBİM | ©2023</property>
+    <property name="copyright">©2023 Pardus</property>
     <property name="comments" translatable="yes">Install &amp; Manage Java versions easily.</property>
-    <property name="website">https://www.pardus.org.tr</property>
-    <property name="website-label" translatable="yes">Website</property>
-    <property name="authors">Emin Fedar</property>
+    <property name="website">https://github.com/pardus/pardus-java-installer</property>
+    <property name="authors">Emin Fedar
+Fatih Altun</property>
     <property name="translator-credits">Emin Fedar</property>
     <property name="artists">Çağrı Gökçe
 Yusuf Düzgün</property>
@@ -55,7 +56,6 @@ Yusuf Düzgün</property>
       <object class="GtkBox">
         <property name="visible">True</property>
         <property name="can-focus">False</property>
-        <property name="margin-bottom">7</property>
         <property name="orientation">vertical</property>
         <child>
           <object class="GtkStack" id="stk_pages">
@@ -66,12 +66,12 @@ Yusuf Düzgün</property>
               <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="margin-start">7</property>
-                <property name="margin-end">7</property>
-                <property name="margin-top">7</property>
-                <property name="margin-bottom">7</property>
+                <property name="margin-start">8</property>
+                <property name="margin-end">8</property>
+                <property name="margin-top">8</property>
+                <property name="margin-bottom">8</property>
                 <property name="orientation">vertical</property>
-                <property name="spacing">7</property>
+                <property name="spacing">8</property>
                 <child>
                   <object class="GtkImage">
                     <property name="visible">True</property>
@@ -103,12 +103,12 @@ Yusuf Düzgün</property>
                     <property name="valign">center</property>
                     <property name="vexpand">True</property>
                     <property name="orientation">vertical</property>
-                    <property name="spacing">7</property>
+                    <property name="spacing">8</property>
                     <child>
                       <object class="GtkBox">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="spacing">7</property>
+                        <property name="spacing">8</property>
                         <property name="homogeneous">True</property>
                         <child>
                           <object class="GtkLabel">
@@ -205,7 +205,7 @@ Yusuf Düzgün</property>
                       <object class="GtkBox">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="spacing">7</property>
+                        <property name="spacing">8</property>
                         <property name="homogeneous">True</property>
                         <child>
                           <object class="GtkLabel">
@@ -302,7 +302,7 @@ Yusuf Düzgün</property>
                       <object class="GtkBox" id="box_openjdk_8">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="spacing">7</property>
+                        <property name="spacing">8</property>
                         <property name="homogeneous">True</property>
                         <child>
                           <object class="GtkLabel">
@@ -399,7 +399,7 @@ Yusuf Düzgün</property>
                       <object class="GtkBox">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="spacing">7</property>
+                        <property name="spacing">8</property>
                         <property name="homogeneous">True</property>
                         <child>
                           <object class="GtkLabel">
@@ -509,8 +509,8 @@ Yusuf Düzgün</property>
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="valign">center</property>
-                <property name="margin-bottom">20</property>
                 <property name="orientation">vertical</property>
+                <property name="spacing">8</property>
                 <child>
                   <object class="GtkSpinner">
                     <property name="height-request">42</property>
@@ -570,8 +570,8 @@ Yusuf Düzgün</property>
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="valign">center</property>
-                <property name="margin-bottom">20</property>
                 <property name="orientation">vertical</property>
+                <property name="spacing">8</property>
                 <child>
                   <object class="GtkSpinner">
                     <property name="height-request">42</property>
@@ -612,13 +612,13 @@ Yusuf Düzgün</property>
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="valign">center</property>
-                <property name="margin-bottom">20</property>
                 <property name="orientation">vertical</property>
+                <property name="spacing">8</property>
                 <child>
                   <object class="GtkImage">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="stock">gtk-dialog-error</property>
+                    <property name="icon-name">dialog-error-symbolic</property>
                     <property name="icon_size">6</property>
                   </object>
                   <packing>
@@ -633,7 +633,7 @@ Yusuf Düzgün</property>
                     <property name="can-focus">False</property>
                     <property name="label" translatable="yes">Apt is busy.</property>
                     <attributes>
-                      <attribute name="size" value="16000"/>
+                      <attribute name="weight" value="bold"/>
                     </attributes>
                   </object>
                   <packing>
@@ -647,7 +647,6 @@ Yusuf Düzgün</property>
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="margin-top">7</property>
                     <property name="label" translatable="yes">Apt is using by an another program.
 Please close it and try again.</property>
                     <property name="justify">center</property>
@@ -660,13 +659,11 @@ Please close it and try again.</property>
                 </child>
                 <child>
                   <object class="GtkButton" id="btn_apt_ok">
-                    <property name="label">gtk-ok</property>
+                    <property name="label" translatable="yes">OK</property>
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="receives-default">True</property>
                     <property name="halign">center</property>
-                    <property name="margin-top">14</property>
-                    <property name="use-stock">True</property>
                     <property name="always-show-image">True</property>
                     <signal name="clicked" handler="btn_apt_ok_clicked" swapped="no"/>
                     <style>
@@ -730,10 +727,11 @@ Please close it and try again.</property>
           <object class="GtkLabel">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="opacity">0.59999999999999998</property>
+            <property name="margin-top">5</property>
+            <property name="margin-bottom">5</property>
             <property name="label">TÜBİTAK ULAKBİM | 2023</property>
             <attributes>
-              <attribute name="size" value="9500"/>
+              <attribute name="weight" value="thin"/>
             </attributes>
           </object>
           <packing>
@@ -747,8 +745,6 @@ Please close it and try again.</property>
           <object class="GtkSeparator">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="margin-top">7</property>
-            <property name="margin-bottom">7</property>
           </object>
           <packing>
             <property name="expand">False</property>
