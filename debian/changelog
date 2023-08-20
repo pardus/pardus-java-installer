@@ -1,3 +1,26 @@
+pardus-java-installer (0.3.0) unstable; urgency=medium
+
+  [ Fatih Altun ]
+  * Add new category to desktop file for xfce settings
+
+  [ Ercan Ersoy ]
+  * Add some keywords in desktop file
+  * Update a string in about dialog
+
+  [ Fatih Altun ]
+  * Add X-Pardus-Apps to desktop file categories
+  * Update app icon
+  * Update ui spacing values
+  * Update setup.py
+  * Update copyright
+  * Update debian standards
+  * Add about dialog program name
+  * Update pot file
+  * Update Turkish translations
+  * Fix main box spacing values
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Sun, 20 Aug 2023 23:22:01 +0300
+
 pardus-java-installer (0.2.2) unstable; urgency=medium
 
   [ Hugo Carvalho ]
