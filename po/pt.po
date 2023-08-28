@@ -1,14 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
+# Portuguese translation of pardus-java-installer.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Hugo Carvalho <hugokarvalho@hotmail.com>, 2022.
+# Hugo Carvalho <hugokarvalho@hotmail.com>, 2022, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-03 04:05+0300\n"
-"PO-Revision-Date: 2023-07-28 18:46+0100\n"
+"POT-Creation-Date: 2023-08-20 22:34+0300\n"
+"PO-Revision-Date: 2023-08-28 17:05+0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: \n"
 "Language: pt\n"
@@ -18,15 +18,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.3.2\n"
 
-#: ui/MainWindow.glade:11
+#: ui/MainWindow.glade:12
 msgid "Install & Manage Java versions easily."
-msgstr "Instalar e gerir facilmente versões Java."
+msgstr "Instalar e gerir facilmente as versões Java."
 
-#: ui/MainWindow.glade:13
-msgid "Website"
-msgstr "Website"
-
-#: ui/MainWindow.glade:49 ui/MainWindow.glade:766
+#: ui/MainWindow.glade:50 ui/MainWindow.glade:762 src/MainWindow.py:71
 msgid "Pardus Java Installer"
 msgstr "Instalador Java do Pardus"
 
@@ -62,7 +58,7 @@ msgstr "A desinstalar"
 msgid "Apt is busy."
 msgstr "O apt está ocupado."
 
-#: ui/MainWindow.glade:651
+#: ui/MainWindow.glade:650
 msgid ""
 "Apt is using by an another program.\n"
 "Please close it and try again."
@@ -70,6 +66,13 @@ msgstr ""
 "O apt está a ser utilizado por outro programa.\n"
 "Feche-o e tente novamente."
 
-#: ui/MainWindow.glade:697
+#: ui/MainWindow.glade:662
+msgid "OK"
+msgstr "Aceitar"
+
+#: ui/MainWindow.glade:694
 msgid "Installing"
 msgstr "A instalar"
+
+#~ msgid "Website"
+#~ msgstr "Website"
