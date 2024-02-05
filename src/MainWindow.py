@@ -69,6 +69,13 @@ class MainWindow:
         except:
             pass
         self.dialog_about.set_program_name(_("Pardus Java Installer"))
+        if self.dialog_about.get_titlebar() is None:
+            about_headerbar = Gtk.HeaderBar.new()
+            about_headerbar.set_show_close_button(True)
+            about_headerbar.set_title(_("About Pardus Java Installer"))
+            about_headerbar.pack_start(Gtk.Image.new_from_icon_name("pardus-java-installer", Gtk.IconSize.LARGE_TOOLBAR))
+            about_headerbar.show_all()
+            self.dialog_about.set_titlebar(about_headerbar)
 
         # Show Screen:
         self.refreshGUI()
