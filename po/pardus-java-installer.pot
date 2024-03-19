@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-20 22:34+0300\n"
+"POT-Creation-Date: 2024-03-19 10:21+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,56 +17,65 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ui/MainWindow.glade:12
-msgid "Install & Manage Java versions easily."
-msgstr ""
-
-#: ui/MainWindow.glade:50 ui/MainWindow.glade:762 src/MainWindow.py:71
+#: ui/MainWindow.glade:12 ui/MainWindow.glade:724 src/MainWindow.py:71
 msgid "Pardus Java Installer"
 msgstr ""
 
-#: ui/MainWindow.glade:131 ui/MainWindow.glade:228 ui/MainWindow.glade:325
-#: ui/MainWindow.glade:422
+#: ui/MainWindow.glade:93 ui/MainWindow.glade:190 ui/MainWindow.glade:287
+#: ui/MainWindow.glade:384
 msgid "Install"
 msgstr ""
 
-#: ui/MainWindow.glade:144 ui/MainWindow.glade:241 ui/MainWindow.glade:338
-#: ui/MainWindow.glade:435
+#: ui/MainWindow.glade:106 ui/MainWindow.glade:203 ui/MainWindow.glade:300
+#: ui/MainWindow.glade:397
 msgid "Set as Default"
 msgstr ""
 
-#: ui/MainWindow.glade:161 ui/MainWindow.glade:258 ui/MainWindow.glade:355
-#: ui/MainWindow.glade:452
+#: ui/MainWindow.glade:123 ui/MainWindow.glade:220 ui/MainWindow.glade:317
+#: ui/MainWindow.glade:414
 msgid "Default"
 msgstr ""
 
-#: ui/MainWindow.glade:181 ui/MainWindow.glade:278 ui/MainWindow.glade:375
-#: ui/MainWindow.glade:472
+#: ui/MainWindow.glade:143 ui/MainWindow.glade:240 ui/MainWindow.glade:337
+#: ui/MainWindow.glade:434
 msgid "Uninstall"
 msgstr ""
 
-#: ui/MainWindow.glade:531
+#: ui/MainWindow.glade:493
 msgid "Downloading"
 msgstr ""
 
-#: ui/MainWindow.glade:592
+#: ui/MainWindow.glade:554
 msgid "Uninstalling"
 msgstr ""
 
-#: ui/MainWindow.glade:634
+#: ui/MainWindow.glade:596
 msgid "Apt is busy."
 msgstr ""
 
-#: ui/MainWindow.glade:650
+#: ui/MainWindow.glade:612
 msgid ""
 "Apt is using by an another program.\n"
 "Please close it and try again."
 msgstr ""
 
-#: ui/MainWindow.glade:662
+#: ui/MainWindow.glade:624
 msgid "OK"
 msgstr ""
 
-#: ui/MainWindow.glade:694
+#: ui/MainWindow.glade:656
 msgid "Installing"
+msgstr ""
+
+#: ui/MainWindow.glade:749
+msgid "Install & Manage Java versions easily."
+msgstr ""
+
+#. Name Surname <example@examplemail.com>
+#: ui/MainWindow.glade:753
+msgid "translator-credits"
+msgstr ""
+
+#: src/MainWindow.py:75
+msgid "About Pardus Java Installer"
 msgstr ""
