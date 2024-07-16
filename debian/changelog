@@ -1,3 +1,31 @@
+pardus-java-installer (0.3.1) unstable; urgency=medium
+
+  [ Hugo Carvalho ]
+  * Update Portuguese translation
+  * Update Portuguese translation
+
+  [ bariscodefx ]
+  * ported xfce about dialog fix from pardus-software
+
+  [ Pedro Plasencia ]
+  * feat: added spanish translations file and updated translations list in sh file
+
+  [ Fatih Altun ]
+  * Fix translators structure
+  * Update transient and some default values of about window
+  * Fix es translation file
+  * Update pot file
+  * Update Turkish translations
+
+  [ Hugo Carvalho ]
+  * Update Portuguese translations
+  * Update Portuguese translations
+
+  [ sulincix ]
+  * fix kde wayland wrong icon issue
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Tue, 16 Jul 2024 12:27:24 +0300
+
 pardus-java-installer (0.3.0) unstable; urgency=medium
 
   [ Fatih Altun ]
