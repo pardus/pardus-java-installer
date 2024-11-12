@@ -16,7 +16,10 @@ class Application(Gtk.Application):
         GLib.set_prgname("tr.org.pardus.java-installer")
 
     def do_activate(self):
-        self.window = MainWindow(self)
+        # We only allow a single window and raise any existing ones
+        if not self.window:
+            self.window = MainWindow(self)
+        self.window.window.present()
 
     def onExit(self, a):
         self.quit()
