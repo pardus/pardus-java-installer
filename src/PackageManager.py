@@ -11,6 +11,7 @@ class PackageManager:
         self.on_process_finished = on_process_finished
         self.on_progress = on_progress
         self.defaultJavaPath = ""
+        self.defaultJavaWSPath = ""
 
         # Commands
         currentPath = os.path.dirname(os.path.abspath(__file__))
@@ -19,6 +20,7 @@ class PackageManager:
         self.installCommand = ["/usr/bin/pkexec", currentPath + "/Actions.py", "install", "--PACKAGE--"]
         self.removeCommand = ["/usr/bin/pkexec", currentPath + "/Actions.py", "remove", "--PACKAGE--"]
         self.makeDefaultCommand = ["/usr/bin/pkexec", currentPath + "/Actions.py", "make-default", "--PATH--"]
+        self.makeDefaultCommandJavaWS = ["/usr/bin/pkexec", currentPath + "/Actions.py", "make-default-javaws", "--PATH--"]
         self.autoAlternativeCommand = ["/usr/bin/pkexec", currentPath + "/Actions.py", "update-alternatives-auto"]
         self.updateAndRemoveCommand = ["/usr/bin/pkexec", currentPath + "/Actions.py", "update-and-remove",
                                        "--PACKAGE--"]
@@ -26,9 +28,11 @@ class PackageManager:
         # - Info commands:
         self.isInstalledCommand = ["dpkg", "-s", "--PACKAGE--"]
         self.getAlternativesListCommand = ["update-alternatives", "--query", "java"]
+        self.getAlternativesListCommandJavaWS = ["update-alternatives", "--query", "javaws"]
 
         # Get initialize infos:
         self.findDefault()
+        self.findDefaultJavaWS()
 
     def install(self, packageObject):
         installCommand = self.installCommand
@@ -43,6 +47,14 @@ class PackageManager:
         makeDefaultCommand[3] = packageObject["path"]
 
         self.startProcess(makeDefaultCommand)
+
+        if "javaws_path" in packageObject.keys():
+
+            if not self.isDefaultJavaWS(packageObject):
+                makeDefaultCommandJavaWS = self.makeDefaultCommandJavaWS
+                makeDefaultCommandJavaWS[3] = packageObject["javaws_path"]
+                self.startProcess(makeDefaultCommandJavaWS)
+
 
     def uninstall(self, packageObject):
         if self.isDefault(packageObject):
@@ -67,6 +79,9 @@ class PackageManager:
     def isDefault(self, packageObject):
         return packageObject["path"] == self.defaultJavaPath
 
+    def isDefaultJavaWS(self, packageObject):
+        return packageObject["javaws_path"] == self.defaultJavaWSPath
+
     # TOOLS:
     def findDefault(self):
         _, stdout, stderr, exit_status = self.startProcessSync(self.getAlternativesListCommand)
@@ -75,6 +90,15 @@ class PackageManager:
             line = i.decode("utf-8").split(": ")
             if str(line[0]) == "Value":
                 self.defaultJavaPath = line[1]
+                return
+
+    def findDefaultJavaWS(self):
+        _, stdout, stderr, exit_status = self.startProcessSync(self.getAlternativesListCommandJavaWS)
+
+        for i in stdout.splitlines(0):
+            line = i.decode("utf-8").split(": ")
+            if str(line[0]) == "Value":
+                self.defaultJavaWSPath = line[1]
                 return
 
     # PROCESS SPAWNING:
