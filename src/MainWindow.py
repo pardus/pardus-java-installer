@@ -1,11 +1,12 @@
 import gi
 
 gi.require_version('Gtk', '3.0')
-from gi.repository import GLib, Gio, Gtk
+from gi.repository import Gtk
 
 from PackageManager import PackageManager
 
-import os
+import locale, os
+from locale import gettext as _
 
 arch = "amd64"
 try:
@@ -27,39 +28,34 @@ packages = {
         },
     "openjdk_11":
         {
-            "package":"openjdk-11-jre",
+            "package": "openjdk-11-jre",
             "path": "/usr/lib/jvm/java-11-openjdk-{}/bin/java".format(arch)
-         },
+        },
     "openjdk_8":
         {
             "package": "openjdk-8-jre",
             "path": "/usr/lib/jvm/java-8-openjdk-{}/jre/bin/java".format(arch)
-         },
+        },
     "oracle_8":
         {
             "package": "oracle-java8-jdk",
             "path": "/usr/lib/jvm/oracle-java8-jdk-{}/jre/bin/java".format(arch),
             "javaws_path": "/usr/lib/jvm/oracle-java8-jdk-{}/jre/bin/javaws".format(arch)
-         },
+        },
     "oracle_21":
         {
             "package": "jdk-21",
             "path": "/usr/lib/jvm/jdk-21.0.5-oracle-x64/bin/java"
-         },
+        },
 }
-
-import locale, os
-from locale import gettext as _
 
 # Translation Constants:
 APPNAME = "pardus-java-installer"
 TRANSLATIONS_PATH = "/usr/share/locale"
-# SYSTEM_LANGUAGE = os.environ.get("LANG")
 
 # Translation functions:
 locale.bindtextdomain(APPNAME, TRANSLATIONS_PATH)
 locale.textdomain(APPNAME)
-# locale.setlocale(locale.LC_ALL, SYSTEM_LANGUAGE)
 
 
 class MainWindow:
@@ -95,7 +91,8 @@ class MainWindow:
             about_headerbar = Gtk.HeaderBar.new()
             about_headerbar.set_show_close_button(True)
             about_headerbar.set_title(_("About Pardus Java Installer"))
-            about_headerbar.pack_start(Gtk.Image.new_from_icon_name("pardus-java-installer", Gtk.IconSize.LARGE_TOOLBAR))
+            about_headerbar.pack_start(
+                Gtk.Image.new_from_icon_name("pardus-java-installer", Gtk.IconSize.LARGE_TOOLBAR))
             about_headerbar.show_all()
             self.dialog_about.set_titlebar(about_headerbar)
 
@@ -176,7 +173,7 @@ class MainWindow:
 
         oracle_8_installed = self.packageManager.isInstalled(packages["oracle_8"])
         oracle_8_default = (self.packageManager.isDefault(packages["oracle_8"]) and
-                                       self.packageManager.isDefaultJavaWS(packages["oracle_8"]))
+                            self.packageManager.isDefaultJavaWS(packages["oracle_8"]))
         if not oracle_8_installed:
             self.stk_oracle_8.set_visible_child_name("install")
         elif not oracle_8_default:
@@ -192,7 +189,6 @@ class MainWindow:
             self.stk_oracle_21.set_visible_child_name("setdefault")
         else:
             self.stk_oracle_21.set_visible_child_name("default")
-
 
     # Installations Signals:
     def on_btn_install_clicked(self, button):
@@ -218,13 +214,13 @@ class MainWindow:
 
     def btn_apt_ok_clicked(self, button):
         self.stk_pages.set_visible_child_name("page_main")
-    
+
     def on_process_finished(self, status):
         if status == 25600:
             self.stk_pages.set_visible_child_name("page_apt_busy")
         else:
             self.stk_pages.set_visible_child_name("page_main")
-        
+
         self.refreshGUI()
 
         self.window.set_sensitive(True)
@@ -233,8 +229,7 @@ class MainWindow:
         # openjdk8 arm64 package is not available
         if arch == "arm64":
             self.box_openjdk_8.set_visible(False)
-    
+
     def on_install_progress(self, percent, status):
         self.lbl_install_status.set_text(_(status))
         self.lbl_percent.set_text(percent)
-    

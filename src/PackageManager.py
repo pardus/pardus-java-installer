@@ -1,8 +1,8 @@
 import gi
 
 gi.require_version('Gtk', '3.0')
-from gi.repository import GLib, Gio, Gtk
-import os, sys
+from gi.repository import GLib
+import os
 
 
 class PackageManager:
@@ -20,7 +20,8 @@ class PackageManager:
         self.installCommand = ["/usr/bin/pkexec", currentPath + "/Actions.py", "install", "--PACKAGE--"]
         self.removeCommand = ["/usr/bin/pkexec", currentPath + "/Actions.py", "remove", "--PACKAGE--"]
         self.makeDefaultCommand = ["/usr/bin/pkexec", currentPath + "/Actions.py", "make-default", "--PATH--"]
-        self.makeDefaultCommandJavaWS = ["/usr/bin/pkexec", currentPath + "/Actions.py", "make-default-javaws", "--PATH--"]
+        self.makeDefaultCommandJavaWS = ["/usr/bin/pkexec", currentPath + "/Actions.py", "make-default-javaws",
+                                         "--PATH--"]
         self.autoAlternativeCommand = ["/usr/bin/pkexec", currentPath + "/Actions.py", "update-alternatives-auto"]
         self.updateAndRemoveCommand = ["/usr/bin/pkexec", currentPath + "/Actions.py", "update-and-remove",
                                        "--PACKAGE--"]
@@ -55,7 +56,6 @@ class PackageManager:
                 makeDefaultCommandJavaWS[3] = packageObject["javaws_path"]
                 self.startProcess(makeDefaultCommandJavaWS)
 
-
     def uninstall(self, packageObject):
         if self.isDefault(packageObject):
             updateAndRemoveCommand = self.updateAndRemoveCommand
@@ -67,7 +67,6 @@ class PackageManager:
             removeCommand[3] = packageObject["package"] + "*"
 
             self.startProcess(removeCommand)
-
 
     # CHECK BOOLEANS:
     def isInstalled(self, packageObject):
@@ -124,7 +123,7 @@ class PackageManager:
             self.on_progress(f"%{params[2].split('.')[0]}", "Downloading")
         elif 'pmstatus' in params:
             self.on_progress(params[3].rstrip(), "Installing")
-        
+
         return True
 
     def onProcessStderr(self, source, condition):

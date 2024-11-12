@@ -1,9 +1,9 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
+
 import gi
 
 gi.require_version('Gtk', '3.0')
-from gi.repository import GLib, Gio, Gtk
-import sys, os, subprocess
+import sys, subprocess
 
 operation = sys.argv[1]
 package = sys.argv[2]
@@ -24,5 +24,6 @@ cmd = commands[operation]
 def startProcess(params):
     status = subprocess.call(params)
     exit(status)
+
 
 startProcess(cmd)
