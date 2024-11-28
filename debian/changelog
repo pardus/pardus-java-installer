@@ -1,3 +1,12 @@
+pardus-java-installer (0.4.0) unstable; urgency=medium
+
+  * Add jdk-21 package, javaws control for oracle8 and Update ui
+  * Add window present control
+  * Reformat Code
+  * Update copyright
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Thu, 28 Nov 2024 17:07:09 +0300
+
 pardus-java-installer (0.3.1) unstable; urgency=medium
 
   [ Hugo Carvalho ]
