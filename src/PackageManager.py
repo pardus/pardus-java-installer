@@ -36,7 +36,7 @@ class PackageManager:
         self.findDefaultJavaWS()
 
     def install(self, packageObject):
-        installCommand = self.installCommand
+        installCommand = self.installCommand.copy()
         installCommand[3] = packageObject["package"]
 
         self.startProcess(installCommand)
@@ -44,7 +44,7 @@ class PackageManager:
         self.on_progress("%0", "Downloading")
 
     def set_as_default(self, packageObject):
-        makeDefaultCommand = self.makeDefaultCommand
+        makeDefaultCommand = self.makeDefaultCommand.copy()
         makeDefaultCommand[3] = packageObject["path"]
 
         self.startProcess(makeDefaultCommand)
@@ -52,25 +52,25 @@ class PackageManager:
         if "javaws_path" in packageObject.keys():
 
             if not self.isDefaultJavaWS(packageObject):
-                makeDefaultCommandJavaWS = self.makeDefaultCommandJavaWS
+                makeDefaultCommandJavaWS = self.makeDefaultCommandJavaWS.copy()
                 makeDefaultCommandJavaWS[3] = packageObject["javaws_path"]
                 self.startProcess(makeDefaultCommandJavaWS)
 
     def uninstall(self, packageObject):
         if self.isDefault(packageObject):
-            updateAndRemoveCommand = self.updateAndRemoveCommand
+            updateAndRemoveCommand = self.updateAndRemoveCommand.copy()
             updateAndRemoveCommand[3] = updateAndRemoveCommand[3].replace("--PACKAGE--", packageObject["package"] + "*")
 
             self.startProcess(updateAndRemoveCommand)
         else:
-            removeCommand = self.removeCommand
+            removeCommand = self.removeCommand.copy()
             removeCommand[3] = packageObject["package"] + "*"
 
             self.startProcess(removeCommand)
 
     # CHECK BOOLEANS:
     def isInstalled(self, packageObject):
-        isInstalledCommand = self.isInstalledCommand
+        isInstalledCommand = self.isInstalledCommand.copy()
         isInstalledCommand[2] = packageObject["package"]
         _, stdout, stderr, exit_status = self.startProcessSync(isInstalledCommand)
         return exit_status == 0
