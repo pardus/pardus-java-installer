@@ -1,3 +1,11 @@
+pardus-java-installer (0.5.0) unstable; urgency=medium
+
+  * Update app screenshot
+  * Update java versions for Pardus25
+  * Fix list references
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Mon, 13 Oct 2025 17:48:34 +0300
+
 pardus-java-installer (0.4.0) unstable; urgency=medium
 
   * Add jdk-21 package, javaws control for oracle8 and Update ui
