@@ -42,6 +42,11 @@ packages = {
             "package": "jdk-25",
             "path": "/usr/lib/jvm/jdk-25-oracle-x64/bin/java"
         },
+    "oracle_11":
+        {
+            "package": "jdk-11",
+            "path": "/usr/lib/jvm/jdk-11-oracle-x64/bin/java"
+        }
 }
 
 # Translation Constants:
@@ -113,6 +118,7 @@ class MainWindow:
         self.btn_uninstall_openjdk_21 = self.builder.get_object("btn_uninstall_openjdk_21")
         self.btn_uninstall_oracle_8 = self.builder.get_object("btn_uninstall_oracle_8")
         self.btn_uninstall_oracle_25 = self.builder.get_object("btn_uninstall_oracle_25")
+        self.btn_uninstall_oracle_11 = self.builder.get_object("btn_uninstall_oracle_11")
 
         # Button Stacks:
         self.stk_openjdk_25 = self.builder.get_object("stk_openjdk_25")
@@ -120,7 +126,7 @@ class MainWindow:
         self.stk_openjdk_8 = self.builder.get_object("stk_openjdk_8")
         self.stk_oracle_8 = self.builder.get_object("stk_oracle_8")
         self.stk_oracle_25 = self.builder.get_object("stk_oracle_25")
-
+        self.stk_oracle_11 = self.builder.get_object("stk_oracle_11")
         # Boxes:
         self.box_openjdk_8 = self.builder.get_object("box_openjdk_8")
 
@@ -135,7 +141,8 @@ class MainWindow:
         self.btn_uninstall_openjdk_21.set_sensitive(self.packageManager.isInstalled(packages["openjdk_21"]))
         self.btn_uninstall_oracle_8.set_sensitive(self.packageManager.isInstalled(packages["oracle_8"]))
         self.btn_uninstall_oracle_25.set_sensitive(self.packageManager.isInstalled(packages["oracle_25"]))
-
+        self.btn_uninstall_oracle_11.set_sensitive(self.packageManager.isInstalled(packages["oracle_11"]))
+        
         # Set default button stack
         openjdk_25_installed = self.packageManager.isInstalled(packages["openjdk_25"])
         openjdk_25_default = self.packageManager.isDefault(packages["openjdk_25"])
@@ -174,6 +181,14 @@ class MainWindow:
         else:
             self.stk_oracle_25.set_visible_child_name("default")
 
+        oracle_11_installed = self.packageManager.isInstalled(packages["oracle_11"])
+        oracle_11_default = self.packageManager.isDefault(packages["oracle_11"])
+        if not oracle_11_installed:
+            self.stk_oracle_11.set_visible_child_name("install")
+        elif not oracle_11_default:
+            self.stk_oracle_11.set_visible_child_name("setdefault")
+        else:
+            self.stk_oracle_11.set_visible_child_name("default")
     # Installations Signals:
     def on_btn_install_clicked(self, button):
         package = button.get_name()  # like openjdk_21, openjdk_25, oracle_8
