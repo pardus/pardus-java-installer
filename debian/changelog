@@ -1,3 +1,14 @@
+pardus-java-installer (0.5.2) unstable; urgency=medium
+
+  [ fevzi.tatar ]
+  * Add jdk-11 package and update ui
+  * Add path lists
+
+  [ Fatih Altun ]
+  * Add author
+
+ -- Fatih Altun <fatih.altun@pardus.org.tr>  Mon, 02 Feb 2026 17:00:38 +0300
+
 pardus-java-installer (0.5.1) unstable; urgency=medium
 
   * Update app icon
