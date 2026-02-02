@@ -848,7 +848,8 @@ Please close it and try again.</property>
     <property name="comments" translatable="yes">Install &amp; Manage Java versions easily.</property>
     <property name="website">https://github.com/pardus/pardus-java-installer</property>
     <property name="authors">Emin Fedar &lt;emin.fedar@pardus.org.tr&gt;
-Fatih Altun &lt;fatih.altun@pardus.org.tr&gt;</property>
+Fatih Altun &lt;fatih.altun@pardus.org.tr&gt;
+Fevzi Fırat Tatar &lt;fevzi.tatar@tubitak.gov.tr&gt;</property>
     <property name="translator-credits" translatable="yes" comments="Name Surname &lt;example@examplemail.com&gt;">translator-credits</property>
     <property name="artists">Çağrı Gökçe &lt;dev@pardus.org.tr&gt;
 Yusuf Düzgün &lt;yusuf.duzgun@pardus.org.tr&gt;</property>
