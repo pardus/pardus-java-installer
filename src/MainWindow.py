@@ -24,28 +24,29 @@ packages = {
     "openjdk_25":
         {
             "package": "openjdk-25-jre",
-            "path": "/usr/lib/jvm/java-25-openjdk-{}/bin/java".format(arch)
+            "path": ["/usr/lib/jvm/java-25-openjdk-{}/bin/java".format(arch)]
         },
     "openjdk_21":
         {
             "package": "openjdk-21-jre",
-            "path": "/usr/lib/jvm/java-21-openjdk-{}/bin/java".format(arch)
+            "path": ["/usr/lib/jvm/java-21-openjdk-{}/bin/java".format(arch)]
         },
     "oracle_8":
         {
             "package": "oracle-java8-jdk",
-            "path": "/usr/lib/jvm/oracle-java8-jdk-{}/jre/bin/java".format(arch),
-            "javaws_path": "/usr/lib/jvm/oracle-java8-jdk-{}/jre/bin/javaws".format(arch)
+            "path": ["/usr/lib/jvm/oracle-java8-jdk-{}/jre/bin/java".format(arch)],
+            "javaws_path": ["/usr/lib/jvm/oracle-java8-jdk-{}/jre/bin/javaws".format(arch)]
         },
     "oracle_25":
         {
             "package": "jdk-25",
-            "path": "/usr/lib/jvm/jdk-25-oracle-x64/bin/java"
+            "path": ["/usr/lib/jvm/jdk-25.0.2-oracle-x64/bin/java",
+                     "/usr/lib/jvm/jdk-25-oracle-x64/bin/java"]
         },
     "oracle_11":
         {
             "package": "jdk-11",
-            "path": "/usr/lib/jvm/jdk-11-oracle-x64/bin/java"
+            "path": ["/usr/lib/jvm/jdk-11.0.30-oracle-x64/bin/java"]
         }
 }
 

@@ -45,15 +45,16 @@ class PackageManager:
 
     def set_as_default(self, packageObject):
         makeDefaultCommand = self.makeDefaultCommand.copy()
-        makeDefaultCommand[3] = packageObject["path"]
-
+        path = next((p for p in packageObject["path"] if os.path.exists(p)), None)
+        makeDefaultCommand[3] = path
         self.startProcess(makeDefaultCommand)
 
         if "javaws_path" in packageObject.keys():
 
             if not self.isDefaultJavaWS(packageObject):
                 makeDefaultCommandJavaWS = self.makeDefaultCommandJavaWS.copy()
-                makeDefaultCommandJavaWS[3] = packageObject["javaws_path"]
+                pathJavaWS = next((p for p in packageObject["path"] if os.path.exists(p)), None)
+                makeDefaultCommandJavaWS[3] = pathJavaWS
                 self.startProcess(makeDefaultCommandJavaWS)
 
     def uninstall(self, packageObject):
@@ -76,10 +77,16 @@ class PackageManager:
         return exit_status == 0
 
     def isDefault(self, packageObject):
-        return packageObject["path"] == self.defaultJavaPath
+        for path in packageObject["path"]:
+            if path == self.defaultJavaPath:
+                return True
+        return False
 
     def isDefaultJavaWS(self, packageObject):
-        return packageObject["javaws_path"] == self.defaultJavaWSPath
+        for path in packageObject["javaws_path"]:
+            if path == self.defaultJavaWSPath:
+                return True
+        return False
 
     # TOOLS:
     def findDefault(self):
