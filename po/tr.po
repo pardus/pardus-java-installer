@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-19 10:21+0300\n"
+"POT-Creation-Date: 2026-06-17 13:00+0300\n"
 "PO-Revision-Date: 2024-03-19 10:21+0300\n"
 "Last-Translator: Fatih Altun <fatih.altun@pardus.org.tr>\n"
 "Language-Team: Turkish <dev@pardus.org.tr>\n"
@@ -20,43 +20,27 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0\n"
 "X-Generator: Gtranslator 42.0\n"
 
-#: ui/MainWindow.glade:12 ui/MainWindow.glade:724 src/MainWindow.py:71
+#: ui/MainWindow.glade:12 ui/MainWindow.glade:324 src/MainWindow.py:80
 msgid "Pardus Java Installer"
 msgstr "Pardus Java Kurucu"
 
-#: ui/MainWindow.glade:93 ui/MainWindow.glade:190 ui/MainWindow.glade:287
-#: ui/MainWindow.glade:384
-msgid "Install"
-msgstr "Yükle"
-
-#: ui/MainWindow.glade:106 ui/MainWindow.glade:203 ui/MainWindow.glade:300
-#: ui/MainWindow.glade:397
-msgid "Set as Default"
-msgstr "Varsayılan Yap"
-
-#: ui/MainWindow.glade:123 ui/MainWindow.glade:220 ui/MainWindow.glade:317
-#: ui/MainWindow.glade:414
-msgid "Default"
-msgstr "Varsayılan"
-
-#: ui/MainWindow.glade:143 ui/MainWindow.glade:240 ui/MainWindow.glade:337
-#: ui/MainWindow.glade:434
-msgid "Uninstall"
-msgstr "Kaldır"
-
-#: ui/MainWindow.glade:493
+#: ui/MainWindow.glade:126 src/PackageManager.py:227
 msgid "Downloading"
 msgstr "İndiriliyor"
 
-#: ui/MainWindow.glade:554
+#: ui/MainWindow.glade:139
+msgid "Cancel"
+msgstr "İptal Et"
+
+#: ui/MainWindow.glade:185
 msgid "Uninstalling"
 msgstr "Kaldırılıyor"
 
-#: ui/MainWindow.glade:596
+#: ui/MainWindow.glade:226
 msgid "Apt is busy."
 msgstr "Apt meşgul."
 
-#: ui/MainWindow.glade:612
+#: ui/MainWindow.glade:242
 msgid ""
 "Apt is using by an another program.\n"
 "Please close it and try again."
@@ -64,26 +48,49 @@ msgstr ""
 "Apt'yi başka bir program kullanıyor.\n"
 "Lütfen kapatın ve tekrar deneyin."
 
-#: ui/MainWindow.glade:624
+#: ui/MainWindow.glade:254
 msgid "OK"
 msgstr "Tamam"
 
-#: ui/MainWindow.glade:656
-msgid "Installing"
-msgstr "Kuruluyor"
-
-#: ui/MainWindow.glade:749
+#: ui/MainWindow.glade:349
 msgid "Install & Manage Java versions easily."
 msgstr "Java sürümlerini kolayca yükleyin & yönetin."
 
 #. Name Surname <example@examplemail.com>
-#: ui/MainWindow.glade:753
+#: ui/MainWindow.glade:354
 msgid "translator-credits"
 msgstr "Emin Fedar <emin.fedar@pardus.org.tr>"
 
-#: src/MainWindow.py:75
+#: src/MainWindow.py:84
 msgid "About Pardus Java Installer"
 msgstr "Pardus Java Kurucu Hakkında"
+
+#: src/MainWindow.py:125
+msgid "Default"
+msgstr "Varsayılan"
+
+#: src/MainWindow.py:127
+msgid "Set as Default"
+msgstr "Varsayılan Yap"
+
+#: src/MainWindow.py:133
+msgid "Uninstall"
+msgstr "Kaldır"
+
+#: src/MainWindow.py:140
+msgid "Install"
+msgstr "Yükle"
+
+#: src/MainWindow.py:189
+msgid "Are you sure?"
+msgstr "Emin misiniz?"
+
+#: src/MainWindow.py:189
+msgid "Operation will be cancelled"
+msgstr "İşlem iptal edilecek"
+
+#~ msgid "Installing"
+#~ msgstr "Kuruluyor"
 
 #~ msgid "Website"
 #~ msgstr "Web Sitesi"
