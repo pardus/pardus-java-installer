@@ -1,29 +1,32 @@
 #!/usr/bin/env python3
+import os
+import subprocess
+import sys
 
-import gi
+import PackageManager
 
-gi.require_version('Gtk', '3.0')
-import sys, subprocess
+if __name__ == "__main__":
+    if len(sys.argv) == 3:
+        operation = sys.argv[1]
+        package = sys.argv[2]
+        path = None
+    elif len(sys.argv) == 4:
+        operation = sys.argv[1]
+        package = sys.argv[2]
+        path = sys.argv[3]
+    else:
+        print("Usage: ./Actions.py operation package (path)")
+        sys.exit(1)
 
-operation = sys.argv[1]
-package = sys.argv[2]
+    cmd = PackageManager.get_command(operation, package=package, path=path)
+    print(f"Action Command: {cmd}")
+    if cmd:
+        try:
+            subprocess.run(cmd)
+        except Exception as e:
+            print("Exception happened on process run:", e)
+            print(sys.argv)
+    else:
+        print(f"Not valid command tuple: ({operation},{package},{path})")
 
-commands = {
-    "install": ["apt", "install", package, "-yq", "-o", "APT::Status-Fd=1"],
-    "remove": ["apt", "remove", "--purge", package, "-yq"],
-    "make-default": ["update-alternatives", "--set", "java", package],
-    "make-default-javaws": ["update-alternatives", "--set", "javaws", package],
-    "update-alternatives-auto": ["update-alternatives", "--auto", "java"],
-    "update-and-remove": ["/bin/sh", "-c", "update-alternatives --auto java && apt purge " + package + " -yq"]
-}
-
-cmd = commands[operation]
-
-
-# PROCESS SPAWNING:
-def startProcess(params):
-    status = subprocess.call(params)
-    exit(status)
-
-
-startProcess(cmd)
+    sys.exit(0)

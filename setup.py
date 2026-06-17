@@ -41,6 +41,7 @@ data_files = [
                    "src/MainWindow.py",
                    "src/PackageManager.py",
                    "src/Actions.py",
+                   "src/Arch.py",
                    "src/__version__"]),
                  ("/usr/share/pardus/pardus-java-installer/ui",
                   ["ui/MainWindow.glade"]),
