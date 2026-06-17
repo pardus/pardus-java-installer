@@ -92,7 +92,7 @@ class MainWindow:
 
         try:
             version = open(
-                os.path.dirname(os.path.abspath(__file__)) + "/__version__"
+                os.path.dirname(os.path.abspath(__file__)) + "/../__version__"
             ).readline()
             self.dialog_about.set_version(version)
         except:
