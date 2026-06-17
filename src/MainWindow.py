@@ -1,6 +1,7 @@
 import gi
 
 import Arch
+import Dialogs
 
 gi.require_version("Gtk", "3.0")
 import locale
@@ -9,7 +10,7 @@ from locale import gettext as _
 
 from gi.repository import Gtk
 
-from PackageManager import PACKAGES, PackageManager
+from PackageManager import PACKAGES, PackageManager, get_package_info
 
 # Translation Constants:
 APPNAME = "pardus-java-installer"
@@ -54,7 +55,7 @@ class MainWindow:
 
     def define_variables(self):
         # Prepare PackageManager
-        self.packageManager = PackageManager(
+        self.package_manager = PackageManager(
             self.on_process_finished, self.on_install_progress
         )
 
@@ -67,8 +68,9 @@ class MainWindow:
         self.stk_pages = UI("stk_pages")
         self.dialog_about = UI("dialog_about")
 
-        self.lbl_percent = UI("lbl_percent")
+        self.pb_progress = UI("pb_progress")
         self.lbl_install_status = UI("lbl_install_status")
+        self.lbl_download_name = UI("lbl_download_name")
 
         # Box
         self.box_java_list = UI("box_java_list")
@@ -98,8 +100,8 @@ class MainWindow:
 
     def setup_ui(self):
         # Refresh default information
-        self.packageManager.find_default()
-        self.packageManager.find_default_javaws()
+        self.package_manager.find_default()
+        self.package_manager.find_default_javaws()
 
         # Delete old children
         self.box_java_list.foreach(lambda w: self.box_java_list.remove(w))
@@ -114,8 +116,8 @@ class MainWindow:
             box = Gtk.Box(spacing=21, homogeneous=True)
             box.add(Gtk.Label(label=package_info["name"], hexpand=True, halign="start"))
 
-            is_installed = self.packageManager.is_installed(p)
-            is_default = self.packageManager.is_default(p)
+            is_installed = self.package_manager.is_installed(p)
+            is_default = self.package_manager.is_default(p)
 
             # Install/Set as Default Button
             if is_installed:
@@ -143,17 +145,22 @@ class MainWindow:
 
     # Installations Signals:
     def on_btn_install_clicked(self, btn, package):
+        package_info = get_package_info(package)
+        if not package_info:
+            return
+
+        self.lbl_download_name.set_text(package_info["name"])
         self.stk_pages.set_visible_child_name("page_downloading")
 
-        self.packageManager.install(package)
+        self.package_manager.install(package)
 
     def on_btn_uninstall_clicked(self, btn, package):
         self.stk_pages.set_visible_child_name("page_processing")
 
-        self.packageManager.uninstall(package)
+        self.package_manager.uninstall(package)
 
     def on_btn_default_clicked(self, btn, package):
-        self.packageManager.set_as_default(package)
+        self.package_manager.set_as_default(package)
 
     def btn_information_clicked(self, button):
         self.dialog_about.run()
@@ -174,6 +181,11 @@ class MainWindow:
         self.window.show_all()
 
     def on_install_progress(self, percent, status):
-        print(f"on_install_progress:{percent}, {status}")
+        # print(f"on_install_progress:{percent}, {status}")
         self.lbl_install_status.set_text(_(status))
-        self.lbl_percent.set_text(percent)
+        self.pb_progress.set_fraction(int(percent) / 100)
+
+    def on_btn_cancel_install_clicked(self, btn):
+        result = Dialogs.ask(_("Are you sure?"), _("Operation will be cancelled"))
+        if result == Gtk.ResponseType.OK:
+            self.package_manager.cancel_install()

@@ -89,18 +89,34 @@
                 <property name="can-focus">False</property>
                 <property name="valign">center</property>
                 <property name="orientation">vertical</property>
-                <property name="spacing">8</property>
+                <property name="spacing">7</property>
                 <child>
-                  <object class="GtkSpinner">
-                    <property name="height-request">42</property>
+                  <object class="GtkLabel" id="lbl_download_name">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="active">True</property>
+                    <property name="label">Oracle Java 8</property>
+                    <style>
+                      <class name="title-4"/>
+                    </style>
                   </object>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
                     <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkProgressBar" id="pb_progress">
+                    <property name="width-request">250</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="halign">center</property>
+                    <property name="show-text">True</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
                   </packing>
                 </child>
                 <child>
@@ -111,31 +127,30 @@
                     <property name="justify">center</property>
                     <property name="ellipsize">end</property>
                     <property name="max-width-chars">20</property>
-                    <attributes>
-                      <attribute name="size" value="16000"/>
-                    </attributes>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="padding">4</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="lbl_percent">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="label">%10</property>
-                    <property name="justify">center</property>
-                    <property name="ellipsize">end</property>
-                    <property name="width-chars">20</property>
-                    <property name="max-width-chars">20</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
                     <property name="position">3</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton">
+                    <property name="label" translatable="yes">Cancel</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">True</property>
+                    <property name="halign">center</property>
+                    <property name="margin-top">14</property>
+                    <signal name="clicked" handler="on_btn_cancel_install_clicked" swapped="no"/>
+                    <style>
+                      <class name="destructive-action"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">5</property>
                   </packing>
                 </child>
               </object>
@@ -153,7 +168,6 @@
                 <property name="spacing">8</property>
                 <child>
                   <object class="GtkSpinner">
-                    <property name="height-request">42</property>
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="active">True</property>
@@ -169,14 +183,13 @@
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="label" translatable="yes">Uninstalling</property>
-                    <attributes>
-                      <attribute name="size" value="16000"/>
-                    </attributes>
+                    <style>
+                      <class name="title-4"/>
+                    </style>
                   </object>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
-                    <property name="padding">4</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
@@ -218,7 +231,7 @@
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
-                    <property name="padding">4</property>
+                    <property name="padding">7</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
@@ -252,6 +265,7 @@ Please close it and try again.</property>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
+                    <property name="padding">7</property>
                     <property name="position">3</property>
                   </packing>
                 </child>
@@ -262,38 +276,7 @@ Please close it and try again.</property>
               </packing>
             </child>
             <child>
-              <object class="GtkBox">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="orientation">vertical</property>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">Installing</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="label">burası "Installing"i translation'a eklemek için.</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-              </object>
-              <packing>
-                <property name="position">4</property>
-              </packing>
+              <placeholder/>
             </child>
           </object>
           <packing>

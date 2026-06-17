@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
-import os
 import subprocess
 import sys
 
 import PackageManager
 
 if __name__ == "__main__":
+    if len(sys.argv) == 2:
+        pid = sys.argv[1]
+        # Kill root installing process
+        subprocess.run(["kill", "-2", pid])  # SIGINT: -2
     if len(sys.argv) == 3:
         operation = sys.argv[1]
         package = sys.argv[2]
@@ -22,7 +25,15 @@ if __name__ == "__main__":
     print(f"Action Command: {cmd}")
     if cmd:
         try:
-            subprocess.run(cmd)
+            proc = subprocess.Popen(cmd)
+            proc.wait()
+        except KeyboardInterrupt:
+            if proc and proc.poll() is None:  # still runs?
+                proc.terminate()  # SIGTERM
+                try:
+                    proc.wait(timeout=5)
+                except subprocess.TimeoutExpired:
+                    proc.kill()  # SIGKILL
         except Exception as e:
             print("Exception happened on process run:", e)
             print(sys.argv)

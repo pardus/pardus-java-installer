@@ -1,5 +1,7 @@
 import os
+import signal
 import subprocess
+from locale import gettext as _
 
 from gi.repository import Gio, GLib
 
@@ -86,6 +88,7 @@ class PackageManager:
 
         self.default_java_path = ""
         self.default_javaws_path = ""
+        self.process = None
 
         # Get initialize infos:
         self.find_default()
@@ -97,7 +100,7 @@ class PackageManager:
             return
 
         self.run_action("install", package)
-        self.on_progress("%0", "Downloading")
+        self.on_progress("0", "Downloading")
 
     def uninstall(self, package):
         package_info = get_package_info(package)
@@ -105,7 +108,7 @@ class PackageManager:
             return
 
         if self.is_default(package):
-            self.run_action("update-alternatives-auto", package)
+            self.run_action_sync("update-alternatives-auto", package)
             self.run_action("remove", package)
         else:
             self.run_action("remove", package)
@@ -195,8 +198,16 @@ class PackageManager:
         else:
             self.start_process(["/usr/bin/pkexec", ACTIONS_PY, operation, package])
 
+    def run_action_sync(self, operation, package, path=None):
+        print(f"-- Running action SYNC: {operation}, {package}, path={path}")
+        if path:
+            subprocess.run(["/usr/bin/pkexec", ACTIONS_PY, operation, package, path])
+        else:
+            subprocess.run(["/usr/bin/pkexec", ACTIONS_PY, operation, package])
+
     def start_process(self, params):
         p = Gio.Subprocess.new(params, Gio.SubprocessFlags.STDOUT_PIPE)
+        self.process_id = p.get_identifier()
 
         stdout_stream = Gio.DataInputStream.new(p.get_stdout_pipe())
 
@@ -213,9 +224,9 @@ class PackageManager:
                 params = line.split(":")
 
                 if "dlstatus" in params:
-                    self.on_progress(f"%{params[2].split('.')[0]}", "Downloading")
+                    self.on_progress(float(params[2]), _("Downloading"))
                 elif "pmstatus" in params:
-                    self.on_progress(params[3].rstrip(), "Installing")
+                    self.on_progress(float(params[2]), params[3].strip())
 
                 read_stdout(stream)
 
@@ -227,6 +238,7 @@ class PackageManager:
                 success = proc.wait_finish(result)
                 exit_code = proc.get_exit_status()
 
+                self.process_id = None
                 self.on_process_finished(exit_code)
 
             except GLib.Error as e:
@@ -234,3 +246,8 @@ class PackageManager:
 
         read_stdout(stdout_stream)
         p.wait_async(None, process_finished)
+
+    def cancel_install(self):
+        if self.process_id:
+            print("Process active, force exiting...")
+            self.start_process(["/usr/bin/pkexec", ACTIONS_PY, self.process_id])
