@@ -2,7 +2,7 @@ Source: pardus-java-installer
 Section: utils
 Priority: optional
 Maintainer: Pardus Dev <dev@pardus.org.tr>
-Build-Depends: debhelper-compat (= 13), dh-python, python3-all, python3-setuptools
+Build-Depends: debhelper-compat (= 13), meson, dh-python, python3-all
 Standards-Version: 4.6.1
 Homepage: https://github.com/pardus/pardus-java-installer
 
@@ -13,5 +13,5 @@ Depends: ${misc:Depends},
          python3 (>=3.5),
          python3-gi,
          gir1.2-gtk-3.0
-Description: Pardus Java Installer
- Install & Manage Java versions easily.
+Description: Install & Manage Java versions easily.
+ Install & Manage Java versions easily with one click.
