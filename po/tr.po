@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-17 13:00+0300\n"
+"POT-Creation-Date: 2026-06-17 14:06+0300\n"
 "PO-Revision-Date: 2024-03-19 10:21+0300\n"
 "Last-Translator: Fatih Altun <fatih.altun@pardus.org.tr>\n"
 "Language-Team: Turkish <dev@pardus.org.tr>\n"
@@ -20,11 +20,11 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0\n"
 "X-Generator: Gtranslator 42.0\n"
 
-#: ui/MainWindow.glade:12 ui/MainWindow.glade:324 src/MainWindow.py:80
+#: ui/MainWindow.glade:12 ui/MainWindow.glade:322 src/MainWindow.py:80
 msgid "Pardus Java Installer"
 msgstr "Pardus Java Kurucu"
 
-#: ui/MainWindow.glade:126 src/PackageManager.py:227
+#: ui/MainWindow.glade:126 src/PackageManager.py:228
 msgid "Downloading"
 msgstr "İndiriliyor"
 
@@ -42,22 +42,23 @@ msgstr "Apt meşgul."
 
 #: ui/MainWindow.glade:242
 msgid ""
-"Apt is using by an another program.\n"
-"Please close it and try again."
+"Package manager is currently being used by another program.\n"
+"\n"
+"Please wait for it to finish and try again."
 msgstr ""
-"Apt'yi başka bir program kullanıyor.\n"
-"Lütfen kapatın ve tekrar deneyin."
+"Paket yöneticisini başka bir program kullanıyor.\n"
+"Lütfen bitmesini bekleyin ve tekrar deneyin."
 
-#: ui/MainWindow.glade:254
+#: ui/MainWindow.glade:255
 msgid "OK"
 msgstr "Tamam"
 
-#: ui/MainWindow.glade:349
+#: ui/MainWindow.glade:347
 msgid "Install & Manage Java versions easily."
 msgstr "Java sürümlerini kolayca yükleyin & yönetin."
 
 #. Name Surname <example@examplemail.com>
-#: ui/MainWindow.glade:354
+#: ui/MainWindow.glade:352
 msgid "translator-credits"
 msgstr "Emin Fedar <emin.fedar@pardus.org.tr>"
 

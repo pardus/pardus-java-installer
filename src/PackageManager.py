@@ -47,8 +47,9 @@ PACKAGES = {
 }
 
 COMMANDS = {
-    "install": ["apt", "install", "==PACKAGE==", "-yq", "-o", "APT::Status-Fd=1"],
-    "remove": ["apt", "purge", "==PACKAGE==", "-yq"],
+    # use apt-get instead of apt to handle "Apt is busy"
+    "install": ["apt-get", "install", "==PACKAGE==", "-yq", "-o", "APT::Status-Fd=1"],
+    "remove": ["apt-get", "purge", "==PACKAGE==", "-yq"],
     "make-default": ["update-alternatives", "--set", "java", "==PATH=="],
     "make-default-javaws": ["update-alternatives", "--set", "javaws", "==PATH=="],
     "update-alternatives-auto": ["update-alternatives", "--auto", "java"],

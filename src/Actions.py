@@ -26,7 +26,8 @@ if __name__ == "__main__":
     if cmd:
         try:
             proc = subprocess.Popen(cmd)
-            proc.wait()
+            code = proc.wait()
+            sys.exit(code)
         except KeyboardInterrupt:
             if proc and proc.poll() is None:  # still runs?
                 proc.terminate()  # SIGTERM
@@ -34,6 +35,7 @@ if __name__ == "__main__":
                     proc.wait(timeout=5)
                 except subprocess.TimeoutExpired:
                     proc.kill()  # SIGKILL
+                    sys.exit(1)
         except Exception as e:
             print("Exception happened on process run:", e)
             print(sys.argv)

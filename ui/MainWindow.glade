@@ -239,8 +239,9 @@
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">Apt is using by an another program.
-Please close it and try again.</property>
+                    <property name="label" translatable="yes">Package manager is currently being used by another program.
+
+Please wait for it to finish and try again.</property>
                     <property name="justify">center</property>
                   </object>
                   <packing>
@@ -274,9 +275,6 @@ Please close it and try again.</property>
                 <property name="name">page_apt_busy</property>
                 <property name="position">3</property>
               </packing>
-            </child>
-            <child>
-              <placeholder/>
             </child>
           </object>
           <packing>

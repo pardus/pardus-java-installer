@@ -171,7 +171,7 @@ class MainWindow:
 
     def on_process_finished(self, status):
         print("Subprocess exit code:", status)
-        if status == 25600:
+        if status == 25600 or status == 100:
             self.stk_pages.set_visible_child_name("page_apt_busy")
         else:
             self.stk_pages.set_visible_child_name("page_main")
