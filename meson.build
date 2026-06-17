@@ -2,6 +2,7 @@ project('pardus-java-installer')
 
 subdir('po')
 subdir('debian')
+subdir('polkit')
 
 # install sources
 install_subdir('src', install_dir: '/usr/share/pardus/pardus-java-installer')
