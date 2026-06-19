@@ -222,6 +222,7 @@ class PackageManager:
                 if line is None:
                     return  # EOF
 
+                print(line)
                 params = line.split(":")
 
                 if "dlstatus" in params:
