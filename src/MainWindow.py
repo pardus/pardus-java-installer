@@ -8,7 +8,7 @@ import locale
 import os
 from locale import gettext as _
 
-from gi.repository import Gtk
+from gi.repository import Gdk, Gtk
 
 from PackageManager import PACKAGES, PackageManager, get_package_info
 
@@ -28,6 +28,8 @@ class MainWindow:
         self.setup_ui_builder()
 
         self.setup_window()
+
+        self.setup_css()
 
         self.define_variables()
 
@@ -53,6 +55,28 @@ class MainWindow:
         self.window.set_application(self.application)
         self.window.connect("destroy", lambda _: self.application.quit())
 
+    def setup_css(self):
+        css_provider = Gtk.CssProvider()
+        css_provider.load_from_data(b"""
+            .p-7 {padding: 7px;}
+            .p-14 {padding: 14px;}
+            .p-14-7 {padding: 7px 14px;}
+            .card {
+                border: 1px solid rgba(130, 130, 130, 0.2);
+                border-radius: 12px;
+            }
+            .green {
+                color: rgba(0, 160, 0, 0.9);
+               	background: alpha(green, 0.1);
+                border-radius: 100%;
+            }
+            """)
+
+        style = self.window.get_style_context()
+        style.add_provider_for_screen(
+            Gdk.Screen.get_default(), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_USER
+        )
+
     def define_variables(self):
         # Prepare PackageManager
         self.package_manager = PackageManager(
@@ -72,7 +96,7 @@ class MainWindow:
         self.lbl_install_status = UI("lbl_install_status")
         self.lbl_download_name = UI("lbl_download_name")
 
-        # Box
+        # Main Page
         self.box_java_list = UI("box_java_list")
 
     def setup_about_dialog(self):
@@ -113,31 +137,56 @@ class MainWindow:
             if Arch.arch() not in package_info["architectures"]:
                 continue
 
-            box = Gtk.Box(spacing=21, homogeneous=True)
-            box.add(Gtk.Label(label=package_info["name"], hexpand=True, halign="start"))
-
             is_installed = self.package_manager.is_installed(p)
             is_default = self.package_manager.is_default(p)
 
-            # Install/Set as Default Button
+            box = Gtk.Box(spacing=7)
+            box.get_style_context().add_class("card")
+            box.get_style_context().add_class("p-14")
+
+            # Package Name
+            box.add(Gtk.Label(label=package_info["name"], hexpand=True, halign="start"))
+
+            # Install
             if is_installed:
                 if is_default:
-                    box.add(Gtk.Label(label=_("Default")))
+                    img = Gtk.Image(
+                        icon_name="object-select-symbolic",
+                        halign="start",
+                        tooltip_text=_("Default"),
+                        width_request=34,
+                        height_request=34,
+                    )
+                    img.get_style_context().add_class("green")
+                    box.add(img)
+
                 else:
-                    btn_set_default = Gtk.Button(label=_("Set as Default"))
+                    # Set as default
+                    btn_set_default = Gtk.Button.new_from_icon_name(
+                        "object-select-symbolic", Gtk.IconSize.BUTTON
+                    )
+                    btn_set_default.set_tooltip_text(
+                        _("Set as Default") if not is_default else _("Default")
+                    )
                     btn_set_default.get_style_context().add_class("suggested-action")
                     btn_set_default.connect("clicked", self.on_btn_default_clicked, p)
                     btn_set_default.set_sensitive(is_installed and not is_default)
                     box.add(btn_set_default)
 
-                btn_uninstall = Gtk.Button(label=_("Uninstall"))
+                btn_uninstall = Gtk.Button.new_from_icon_name(
+                    "user-trash-symbolic", Gtk.IconSize.BUTTON
+                )
+                btn_uninstall.set_tooltip_text(_("Uninstall"))
                 btn_uninstall.get_style_context().add_class("destructive-action")
                 btn_uninstall.connect("clicked", self.on_btn_uninstall_clicked, p)
                 box.add(btn_uninstall)
             else:
-                box.add(Gtk.Label())
+                # btn_install = Gtk.Button(label=_("Install"))
+                btn_install = Gtk.Button.new_from_icon_name(
+                    "document-save-symbolic", Gtk.IconSize.BUTTON
+                )
+                btn_install.set_tooltip_text(_("Install"))
 
-                btn_install = Gtk.Button(label=_("Install"))
                 btn_install.connect("clicked", self.on_btn_install_clicked, p)
                 box.add(btn_install)
 
