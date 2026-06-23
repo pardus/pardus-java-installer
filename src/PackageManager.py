@@ -63,8 +63,12 @@ def get_command(operation, package=None, path=None):
         if package and package in PACKAGES:
             cmd = list(map(lambda x: package if x == "==PACKAGE==" else x, cmd))
 
-            if path and path in PACKAGES[package]["path"]:
-                cmd = list(map(lambda x: path if x == "==PATH==" else x, cmd))
+            if path:
+                if (
+                    path in PACKAGES[package]["path"]
+                    or path in PACKAGES[package]["javaws_path"]
+                ):
+                    cmd = list(map(lambda x: path if x == "==PATH==" else x, cmd))
 
             return cmd
 
@@ -124,11 +128,11 @@ class PackageManager:
 
         self.run_action("make-default", package, path)
         if "javaws_path" in package_info:
-            if not self.is_default_javaws(package):
-                path_javaws = next(
-                    (p for p in package_info["path"] if os.path.exists(p)), None
-                )
-                self.run_action("make-default-javaws", package, path_javaws)
+            print(f"javaws_path: {package_info['javaws_path']}")
+            path_javaws = next(
+                (p for p in package_info["javaws_path"] if os.path.exists(p)), None
+            )
+            self.run_action("make-default-javaws", package, path_javaws)
 
     # CHECK BOOLEANS:
     def is_installed(self, package):
@@ -152,7 +156,7 @@ class PackageManager:
 
     def is_default_javaws(self, package):
         package_info = get_package_info(package)
-        if not package_info:
+        if not package_info or "javaws_path" not in package_info:
             return False
 
         for path in package_info["javaws_path"]:

@@ -138,7 +138,11 @@ class MainWindow:
                 continue
 
             is_installed = self.package_manager.is_installed(p)
+            is_default_javaws = self.package_manager.is_default_javaws(p)
             is_default = self.package_manager.is_default(p)
+
+            if "javaws_path" in package_info and not is_default_javaws:
+                is_default = False
 
             box = Gtk.Box(spacing=7)
             box.get_style_context().add_class("card")
@@ -168,7 +172,6 @@ class MainWindow:
                     btn_set_default.set_tooltip_text(
                         _("Set as Default") if not is_default else _("Default")
                     )
-                    btn_set_default.get_style_context().add_class("suggested-action")
                     btn_set_default.connect("clicked", self.on_btn_default_clicked, p)
                     btn_set_default.set_sensitive(is_installed and not is_default)
                     box.add(btn_set_default)
@@ -186,6 +189,7 @@ class MainWindow:
                     "document-save-symbolic", Gtk.IconSize.BUTTON
                 )
                 btn_install.set_tooltip_text(_("Install"))
+                btn_install.get_style_context().add_class("suggested-action")
 
                 btn_install.connect("clicked", self.on_btn_install_clicked, p)
                 box.add(btn_install)
