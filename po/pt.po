@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-17 14:06+0300\n"
+"POT-Creation-Date: 2026-06-23 11:58+0300\n"
 "PO-Revision-Date: 2024-03-20 18:16+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: \n"
@@ -18,27 +18,32 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4.2\n"
 
-#: ui/MainWindow.glade:12 ui/MainWindow.glade:322 src/MainWindow.py:80
+#: ui/MainWindow.glade:12 ui/MainWindow.glade:58 ui/MainWindow.glade:388
+#: src/MainWindow.py:99
 msgid "Pardus Java Installer"
 msgstr "Instalador Java Pardus"
 
-#: ui/MainWindow.glade:126 src/PackageManager.py:228
+#: ui/MainWindow.glade:98
+msgid "Default Java Version:"
+msgstr ""
+
+#: ui/MainWindow.glade:192 src/PackageManager.py:229
 msgid "Downloading"
 msgstr "A transferir"
 
-#: ui/MainWindow.glade:139
+#: ui/MainWindow.glade:205
 msgid "Cancel"
 msgstr ""
 
-#: ui/MainWindow.glade:185
+#: ui/MainWindow.glade:251
 msgid "Uninstalling"
 msgstr "A desinstalar"
 
-#: ui/MainWindow.glade:226
+#: ui/MainWindow.glade:292
 msgid "Apt is busy."
 msgstr "O apt está ocupado."
 
-#: ui/MainWindow.glade:242
+#: ui/MainWindow.glade:308
 #, fuzzy
 msgid ""
 "Package manager is currently being used by another program.\n"
@@ -48,44 +53,44 @@ msgstr ""
 "O apt está a ser usado por outro programa.\n"
 "Feche-o e tente novamente."
 
-#: ui/MainWindow.glade:255
+#: ui/MainWindow.glade:321
 msgid "OK"
 msgstr "OK"
 
-#: ui/MainWindow.glade:347
+#: ui/MainWindow.glade:413
 msgid "Install & Manage Java versions easily."
 msgstr "Instalar e gerir facilmente as versões Java."
 
 #. Name Surname <example@examplemail.com>
-#: ui/MainWindow.glade:352
+#: ui/MainWindow.glade:418
 msgid "translator-credits"
 msgstr "Hugo Carvalho <hugokarvalho@hotmail.com>"
 
-#: src/MainWindow.py:84
+#: src/MainWindow.py:103
 msgid "About Pardus Java Installer"
 msgstr "Acerca do Instalador Java Pardus"
 
-#: src/MainWindow.py:125
-msgid "Default"
-msgstr "Predefinido"
-
-#: src/MainWindow.py:127
-msgid "Set as Default"
-msgstr "Definir como Predefinido"
-
-#: src/MainWindow.py:133
+#: src/MainWindow.py:156
 msgid "Uninstall"
 msgstr "Desinstalar"
 
-#: src/MainWindow.py:140
+#: src/MainWindow.py:170
+msgid "Set as Default"
+msgstr "Definir como Predefinido"
+
+#: src/MainWindow.py:170
+msgid "Default"
+msgstr "Predefinido"
+
+#: src/MainWindow.py:181
 msgid "Install"
 msgstr "Instalar"
 
-#: src/MainWindow.py:189
+#: src/MainWindow.py:231
 msgid "Are you sure?"
 msgstr ""
 
-#: src/MainWindow.py:189
+#: src/MainWindow.py:231
 msgid "Operation will be cancelled"
 msgstr ""
 
