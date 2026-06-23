@@ -105,7 +105,7 @@ class PackageManager:
             return
 
         self.run_action("install", package)
-        self.on_progress("0", "Downloading")
+        self.on_progress("0", "Downloading", True)
 
     def uninstall(self, package):
         package_info = get_package_info(package)
@@ -230,9 +230,9 @@ class PackageManager:
                 params = line.split(":")
 
                 if "dlstatus" in params:
-                    self.on_progress(float(params[2]), _("Downloading"))
+                    self.on_progress(float(params[2]), _("Downloading"), True)
                 elif "pmstatus" in params:
-                    self.on_progress(float(params[2]), params[3].strip())
+                    self.on_progress(float(params[2]), params[3].strip(), False)
 
                 read_stdout(stream)
 

@@ -99,6 +99,9 @@ class MainWindow:
         # Main Page
         self.box_java_list = UI("box_java_list")
 
+        # Progress Page
+        self.btn_cancel = UI("btn_cancel")
+
     def setup_about_dialog(self):
         self.dialog_about = self.builder.get_object("dialog_about")
         self.dialog_about.set_program_name(_("Pardus Java Installer"))
@@ -233,10 +236,11 @@ class MainWindow:
 
         self.window.show_all()
 
-    def on_install_progress(self, percent, status):
+    def on_install_progress(self, percent, status, cancellable):
         # print(f"on_install_progress:{percent}, {status}")
         self.lbl_install_status.set_text(_(status))
         self.pb_progress.set_fraction(int(percent) / 100)
+        self.btn_cancel.set_sensitive(cancellable)
 
     def on_btn_cancel_install_clicked(self, btn):
         result = Dialogs.ask(_("Are you sure?"), _("Operation will be cancelled"))
