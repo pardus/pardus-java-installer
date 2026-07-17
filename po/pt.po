@@ -1,14 +1,14 @@
 # Portuguese translation of pardus-java-installer.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the pardus-java-installer package.
-# Hugo Carvalho <hugokarvalho@hotmail.com>, 2022, 2023, 2024.
+# Hugo Carvalho <hugokarvalho@hotmail.com>, 2022, 2023, 2024, 2025, 2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-23 15:16+0300\n"
-"PO-Revision-Date: 2024-03-20 18:16+0000\n"
+"PO-Revision-Date: 2026-06-28 19:45+0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: \n"
 "Language: pt\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.9\n"
 
 #: ui/MainWindow.glade:12 ui/MainWindow.glade:58 ui/MainWindow.glade:347
 #: src/MainWindow.py:104
@@ -29,7 +29,7 @@ msgstr "A transferir"
 
 #: ui/MainWindow.glade:164
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #: ui/MainWindow.glade:210
 msgid "Uninstalling"
@@ -40,14 +40,14 @@ msgid "Apt is busy."
 msgstr "O apt está ocupado."
 
 #: ui/MainWindow.glade:267
-#, fuzzy
 msgid ""
 "Package manager is currently being used by another program.\n"
 "\n"
 "Please wait for it to finish and try again."
 msgstr ""
-"O apt está a ser usado por outro programa.\n"
-"Feche-o e tente novamente."
+"O gestor de pacotes está neste momento a ser utilizado por outro programa.\n"
+"\n"
+"Aguarde até que termine e tente novamente."
 
 #: ui/MainWindow.glade:280
 msgid "OK"
@@ -84,11 +84,11 @@ msgstr "Instalar"
 
 #: src/MainWindow.py:238
 msgid "Are you sure?"
-msgstr ""
+msgstr "Tem a certeza?"
 
 #: src/MainWindow.py:238
 msgid "Operation will be cancelled"
-msgstr ""
+msgstr "A operação será cancelada"
 
 #~ msgid "Installing"
 #~ msgstr "A instalar"
