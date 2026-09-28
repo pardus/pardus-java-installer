@@ -25,11 +25,26 @@ PACKAGES = {
         "architectures": ["amd64", "arm64"],
         "depends": ["openjdk-21-jre-headless"],
     },
+    "openjdk-17-jre": {
+        "name": "OpenJDK 17",
+        "path": ["/usr/lib/jvm/java-17-openjdk-{}/bin/java".format(Arch.arch())],
+        "architectures": ["amd64", "arm64"],
+        "depends": ["openjdk-17-jre-headless"],
+    },
     "jdk-25": {
         "name": "Oracle Java 25",
         "path": [
             "/usr/lib/jvm/jdk-25.0.2-oracle-x64/bin/java",
             "/usr/lib/jvm/jdk-25-oracle-x64/bin/java",
+        ],
+        "architectures": ["amd64", "arm64"],
+    },
+    "jdk-17": {
+        "name": "Oracle Java 17",
+        "path": [
+            "/usr/lib/jvm/jdk-17-oracle-x64/bin/java",
+            "/usr/lib/jvm/jdk-17.0.2-oracle-x64/bin/java",
+            "/usr/lib/jvm/jdk-17.0.1-oracle-x64/bin/java",
         ],
         "architectures": ["amd64", "arm64"],
     },
@@ -147,6 +162,17 @@ class PackageManager:
         p = subprocess.run(["dpkg", "-s", package], capture_output=True)
 
         # Return exit status
+        return p.returncode == 0
+
+    def is_available(self, package):
+        if not has_package(package):
+            return False
+
+        p = subprocess.run(
+            ["apt-cache", "show", package],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
         return p.returncode == 0
 
     def is_default(self, package):

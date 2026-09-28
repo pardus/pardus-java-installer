@@ -141,6 +141,9 @@ class MainWindow:
                 continue
 
             is_installed = self.package_manager.is_installed(p)
+            if not is_installed and not self.package_manager.is_available(p):
+                continue
+
             is_default_javaws = self.package_manager.is_default_javaws(p)
             is_default = self.package_manager.is_default(p)
 
