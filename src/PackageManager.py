@@ -164,6 +164,17 @@ class PackageManager:
         # Return exit status
         return p.returncode == 0
 
+    def is_available(self, package):
+        if not has_package(package):
+            return False
+
+        p = subprocess.run(
+            ["apt-cache", "show", package],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+        return p.returncode == 0
+
     def is_default(self, package):
         package_info = get_package_info(package)
         if not package_info:
