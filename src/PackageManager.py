@@ -1,3 +1,4 @@
+import glob
 import os
 import signal
 import subprocess
@@ -27,15 +28,12 @@ PACKAGES = {
     },
     "jdk-25": {
         "name": "Oracle Java 25",
-        "path": [
-            "/usr/lib/jvm/jdk-25.0.2-oracle-x64/bin/java",
-            "/usr/lib/jvm/jdk-25-oracle-x64/bin/java",
-        ],
+        "path": ["/usr/lib/jvm/jdk-25*-oracle-x64/bin/java"],
         "architectures": ["amd64", "arm64"],
     },
     "jdk-11": {
         "name": "Oracle Java 11",
-        "path": ["/usr/lib/jvm/jdk-11.0.30-oracle-x64/bin/java"],
+        "path": ["/usr/lib/jvm/jdk-11*-oracle-x64/bin/java"],
         "architectures": ["amd64", "arm64"],
     },
     "oracle-java8-jdk": {
@@ -58,6 +56,14 @@ COMMANDS = {
 }
 
 
+# Oracle packages keep the full version in the directory name, so the paths are patterns
+def find_paths(patterns):
+    paths = []
+    for pattern in patterns:
+        paths += sorted(glob.glob(pattern))
+    return paths
+
+
 def get_command(operation, package=None, path=None):
     if operation in COMMANDS:
         cmd = COMMANDS[operation].copy()
@@ -65,12 +71,11 @@ def get_command(operation, package=None, path=None):
         if package and package in PACKAGES:
             cmd = list(map(lambda x: package if x == "==PACKAGE==" else x, cmd))
 
-            if path:
-                if (
-                    path in PACKAGES[package]["path"]
-                    or path in PACKAGES[package]["javaws_path"]
-                ):
-                    cmd = list(map(lambda x: path if x == "==PATH==" else x, cmd))
+            if "==PATH==" in cmd:
+                info = PACKAGES[package]
+                if path not in find_paths(info["path"] + info.get("javaws_path", [])):
+                    return None
+                cmd = list(map(lambda x: path if x == "==PATH==" else x, cmd))
 
             if operation == "remove" and "depends" in PACKAGES[package]:
                 cmd += PACKAGES[package]["depends"]
@@ -129,15 +134,16 @@ class PackageManager:
             return
 
         # Get java path
-        path = next((p for p in package_info["path"] if os.path.exists(p)), None)
+        path = next(iter(find_paths(package_info["path"])), None)
+        if not path:
+            return
 
         self.run_action("make-default", package, path)
         if "javaws_path" in package_info:
             print(f"javaws_path: {package_info['javaws_path']}")
-            path_javaws = next(
-                (p for p in package_info["javaws_path"] if os.path.exists(p)), None
-            )
-            self.run_action("make-default-javaws", package, path_javaws)
+            path_javaws = next(iter(find_paths(package_info["javaws_path"])), None)
+            if path_javaws:
+                self.run_action("make-default-javaws", package, path_javaws)
 
     # CHECK BOOLEANS:
     def is_installed(self, package):
@@ -154,20 +160,14 @@ class PackageManager:
         if not package_info:
             return False
 
-        for path in package_info["path"]:
-            if path == self.default_java_path:
-                return True
-        return False
+        return self.default_java_path in find_paths(package_info["path"])
 
     def is_default_javaws(self, package):
         package_info = get_package_info(package)
         if not package_info or "javaws_path" not in package_info:
             return False
 
-        for path in package_info["javaws_path"]:
-            if path == self.default_javaws_path:
-                return True
-        return False
+        return self.default_javaws_path in find_paths(package_info["javaws_path"])
 
     # TOOLS:
     def find_default(self):
