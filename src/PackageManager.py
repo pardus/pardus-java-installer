@@ -144,10 +144,14 @@ class PackageManager:
         if not has_package(package):
             return
 
-        p = subprocess.run(["dpkg", "-s", package], capture_output=True)
+        # dpkg -s also succeeds for removed packages that left config files
+        p = subprocess.run(
+            ["dpkg-query", "-W", "-f=${db:Status-Status}", package],
+            capture_output=True,
+            text=True,
+        )
 
-        # Return exit status
-        return p.returncode == 0
+        return p.stdout == "installed"
 
     def is_default(self, package):
         package_info = get_package_info(package)
