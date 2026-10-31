@@ -99,6 +99,7 @@ class PackageManager:
         self.default_java_path = ""
         self.default_javaws_path = ""
         self.process = None
+        self.apt_errors = []
 
         # Get initialize infos:
         self.find_default()
@@ -215,11 +216,27 @@ class PackageManager:
         else:
             subprocess.run(["/usr/bin/pkexec", ACTIONS_PY, operation, package])
 
+    # apt runs under pkexec without LANG, so its messages are always in English
+    def is_apt_busy(self):
+        return any("lock" in error for error in self.apt_errors)
+
     def start_process(self, params):
-        p = Gio.Subprocess.new(params, Gio.SubprocessFlags.STDOUT_PIPE)
+        self.apt_errors = []
+        p = Gio.Subprocess.new(
+            params,
+            Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_MERGE,
+        )
         self.process_id = p.get_identifier()
 
         stdout_stream = Gio.DataInputStream.new(p.get_stdout_pipe())
+
+        # The last errors can still be in the pipe when the process exits
+        state = {"eof": False, "exit_code": None}
+
+        def report_finished():
+            if state["eof"] and state["exit_code"] is not None:
+                self.process_id = None
+                self.on_process_finished(state["exit_code"])
 
         def read_stdout(stream):
             stream.read_line_async(GLib.PRIORITY_DEFAULT, None, stdout_callback)
@@ -228,13 +245,17 @@ class PackageManager:
             try:
                 line, length = stream.read_line_finish_utf8(result)
 
-                if line is None:
-                    return  # EOF
+                if line is None:  # EOF
+                    state["eof"] = True
+                    report_finished()
+                    return
 
                 print(line)
                 params = line.split(":")
 
-                if "dlstatus" in params:
+                if line.startswith("E: "):
+                    self.apt_errors.append(line[3:])
+                elif "dlstatus" in params:
                     self.on_progress(float(params[2]), _("Downloading"), True)
                 elif "pmstatus" in params:
                     self.on_progress(float(params[2]), params[3].strip(), False)
@@ -243,14 +264,14 @@ class PackageManager:
 
             except GLib.Error as e:
                 print("stdout error:", e)
+                state["eof"] = True
+                report_finished()
 
         def process_finished(proc, result):
             try:
                 success = proc.wait_finish(result)
-                exit_code = proc.get_exit_status()
-
-                self.process_id = None
-                self.on_process_finished(exit_code)
+                state["exit_code"] = proc.get_exit_status()
+                report_finished()
 
             except GLib.Error as e:
                 print("process error:", e)
