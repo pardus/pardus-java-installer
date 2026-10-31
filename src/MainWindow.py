@@ -227,7 +227,7 @@ class MainWindow:
 
     def on_process_finished(self, status):
         print("Subprocess exit code:", status)
-        if status == 25600 or status == 100:
+        if self.package_manager.is_apt_busy():
             self.stk_pages.set_visible_child_name("page_apt_busy")
         else:
             self.stk_pages.set_visible_child_name("page_main")
@@ -235,6 +235,11 @@ class MainWindow:
         self.setup_ui()
 
         self.window.show_all()
+
+        if status == 100 and not self.package_manager.is_apt_busy():
+            Dialogs.info(
+                _("Operation failed"), "\n".join(self.package_manager.apt_errors)
+            )
 
     def on_install_progress(self, percent, status, cancellable):
         # print(f"on_install_progress:{percent}, {status}")

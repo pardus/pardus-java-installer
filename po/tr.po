@@ -83,6 +83,10 @@ msgstr "Kaldır"
 msgid "Install"
 msgstr "Yükle"
 
+#: src/MainWindow.py:242
+msgid "Operation failed"
+msgstr "İşlem başarısız oldu"
+
 #: src/MainWindow.py:238
 msgid "Are you sure?"
 msgstr "Emin misiniz?"
